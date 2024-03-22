@@ -2,9 +2,9 @@
 import { useEffect, useState } from 'react';
 import { dataQuestions } from './dataQuestion';
 import { dataSubmissions } from './dataSubmissions';
-import { Helmet } from 'react-helmet';
 import { useOutletContext } from 'react-router-dom';
 import { fakeApi, statusPriority } from './utils/utils';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 type CategoryQuestion = {
     category: string;
@@ -99,10 +99,14 @@ export const QuestionBoard = () => {
 
     return (
         <div>
-            <Helmet>
-                <title>Question Board</title>
-                <meta name="description" content="Question board task was guided by Tony Nguyen" />
-            </Helmet>
+            <HelmetProvider>
+                <div>
+                    <Helmet>
+                        <title>Question Board</title>
+                        <meta name="description" content="Question board task was guided by Tony Nguyen" />
+                    </Helmet>
+                </div>
+            </HelmetProvider>
             <div className={`flex flex-col gap-10 justify-between py-5 md:flex-row md:gap-4 ${collapsed ? 'px-10' : 'px-4'}`}>
                 {categoryQuestions && categoryQuestions.map((category) =>
                     <div key={category.category} className="w-full">

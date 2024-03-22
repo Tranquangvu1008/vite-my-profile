@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
@@ -9,16 +9,28 @@ import { ToggleThemeButton } from '../../components/SideBar/ToggleThemeButton'
 const { Header, Sider } = Layout
 
 function LayoutPage() {
-  const [darkTheme, setDarkTheme] = useState(true)
-  const [collapsed, setCollapsed] = useState(false)
+  const [darkTheme, setDarkTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' ? true : false : true)
+  const [collapsed, setCollapsed] = useState(localStorage.getItem('collapse') ? localStorage.getItem('collapse') === 'collapsed' ? true : false : true)
+
+  useEffect(() => {
+    localStorage.setItem('theme', darkTheme === true ? 'dark' : 'light');
+  }, [darkTheme])
+
+  useEffect(() => {
+    localStorage.setItem('collapse', collapsed === true ? 'collapsed' : 'uncollapsed');
+  }, [collapsed])
 
   const toggleTheme = () => {
     setDarkTheme(!darkTheme)
   }
 
+  const collapsedMenu = () => {
+    setCollapsed(!collapsed)
+  }
+
   return (
     <Layout>
-      <Sider collapsed={collapsed} collapsible trigger={null} theme={darkTheme ? 'dark' : 'light'} className='sideBar'>
+      <Sider collapsed={collapsed} collapsible trigger={null} theme={darkTheme ? 'dark' : 'light'} className='text-white h-svh md:h-screen '>
         <Logo darkTheme={darkTheme} collapsed={collapsed} />
         <MenuList darkTheme={darkTheme} />
       </Sider>
@@ -33,7 +45,7 @@ function LayoutPage() {
           <button
             type='button'
             className={darkTheme ? 'ml-4 text-xl text-white' : 'ml-4 text-xl text-black'}
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={collapsedMenu}
           >
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </button>
