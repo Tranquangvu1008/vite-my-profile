@@ -19,7 +19,7 @@ function LayoutPage() {
   return (
     <Layout>
       <Sider collapsed={collapsed} collapsible trigger={null} theme={darkTheme ? 'dark' : 'light'} className='sideBar'>
-        <Logo darkTheme={darkTheme} />
+        <Logo darkTheme={darkTheme} collapsed={collapsed} />
         <MenuList darkTheme={darkTheme} />
       </Sider>
       <Layout>
@@ -40,7 +40,7 @@ function LayoutPage() {
           <ToggleThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
         </Header>
         <div className={darkTheme ? 'overflow-y-auto h-screen-minus-64 bg-[#2c4b68] text-white' : 'overflow-y-auto h-screen-minus-64 bg-[#f7f3f3] text-black'}>
-          <Outlet />
+          <Outlet context={collapsed} />
         </div>
       </Layout>
     </Layout>

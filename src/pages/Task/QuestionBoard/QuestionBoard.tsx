@@ -2,6 +2,9 @@
 import { useEffect, useState } from 'react';
 import { dataQuestions } from './dataQuestion';
 import { dataSubmissions } from './dataSubmissions';
+import { Helmet } from 'react-helmet';
+import { useOutletContext } from 'react-router-dom';
+import { fakeApi, statusPriority } from './utils/utils';
 
 type CategoryQuestion = {
     category: string;
@@ -21,29 +24,8 @@ type SubmissionResponse = {
     status: string
 };
 
-function fakeApi(data: unknown) {
-    return new Promise((resolve) => {
-        // setTimeout(() => {
-        resolve(data)
-        // }, 1000)
-    })
-}
-
-function statusPriority(status: string) {
-    switch (status) {
-        case 'CORRECT':
-            return 1;
-        case 'PARTIALLY_CORRECT':
-            return 2;
-        case 'INCORRECT':
-            return 3;
-        default:
-            return 4;
-    }
-}
-
 export const QuestionBoard = () => {
-
+    const collapsed: boolean = useOutletContext();
     const [submission, setSubmission] = useState<SubmissionResponse[]>([]);
     const [categoryQuestions, setCategoryQuestions] = useState<CategoryQuestion[]>([]);
 
@@ -117,7 +99,11 @@ export const QuestionBoard = () => {
 
     return (
         <div>
-            <div className="flex gap-4 justify-between px-28 py-10">
+            <Helmet>
+                <title>Question Board</title>
+                <meta name="description" content="Question board task was guided by Tony Nguyen" />
+            </Helmet>
+            <div className={`flex flex-col gap-10 justify-between py-5 md:flex-row md:gap-4 ${collapsed ? 'px-10' : 'px-4'}`}>
                 {categoryQuestions && categoryQuestions.map((category) =>
                     <div key={category.category} className="w-full">
                         <h2>{category.category} - {category.totalCorrect}/{category.totalQuestion.length}</h2>

@@ -1,14 +1,16 @@
-import { FireOutlined } from '@ant-design/icons'
+import { CodeOutlined } from '@ant-design/icons'
 
 interface LogoProps {
   darkTheme: boolean
+  collapsed: boolean
 }
 
-export const Logo = ({ darkTheme }: LogoProps) => {
+export const Logo = ({ darkTheme, collapsed }: LogoProps) => {
   return (
-    <div className={darkTheme ? 'flex items-center justify-center p-[10px] mb-1 text-white' : 'flex items-center justify-center p-[10px] mb-1 text-black'}>
-      <div className='logo-icon'>
-        <FireOutlined />
+    <div className={`flex items-center justify-center mb-1 ${darkTheme ? 'text-white' : 'text-black'} `}>
+      <div className={`flex h-[64px] items-center ${!collapsed && 'mx-2 gap-2'}`}>
+        <CodeOutlined className={collapsed ? 'text-2xl' : 'text-lg'} />
+        <strong className={collapsed ? 'hidden' : ''}>DEVUcoding</strong>
       </div>
     </div>
   )
