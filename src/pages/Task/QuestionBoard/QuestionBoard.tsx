@@ -5,6 +5,7 @@ import { dataSubmissions } from './dataSubmissions';
 import { useOutletContext } from 'react-router-dom';
 import { fakeApi, statusPriority } from './utils/utils';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { OutletContextType } from '../../../interface';
 
 type CategoryQuestion = {
     category: string;
@@ -25,7 +26,7 @@ type SubmissionResponse = {
 };
 
 export const QuestionBoard = () => {
-    const collapsed: boolean = useOutletContext();
+    const { collapsed } = useOutletContext<OutletContextType>();
     const [submission, setSubmission] = useState<SubmissionResponse[]>([]);
     const [categoryQuestions, setCategoryQuestions] = useState<CategoryQuestion[]>([]);
 

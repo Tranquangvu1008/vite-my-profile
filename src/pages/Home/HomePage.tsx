@@ -1,6 +1,14 @@
 import { Helmet, HelmetProvider } from "react-helmet-async"
+import Hero from "./components/Hero/Hero"
+import './HomePage.scss'
+import { useOutletContext } from "react-router-dom";
+import { OutletContextType } from "../../interface";
+import { Skills } from "./components/Skills/Skills";
+import { WorkExperience } from "./components/WorkExperience/WorkExperience";
 
 export const HomePage = () => {
+  const { collapsed } = useOutletContext<OutletContextType>();
+
   return (
     <div className='flex flex-col'>
       <HelmetProvider>
@@ -11,6 +19,14 @@ export const HomePage = () => {
           </Helmet>
         </div>
       </HelmetProvider >
+      <div>
+        <div className='container'>
+          <Hero collapsed={collapsed} />
+          <Skills collapsed={collapsed} />
+          <WorkExperience collapsed={collapsed} />
+          {/* <ContactMe /> */}
+        </div>
+      </div>
     </div>
   )
 }

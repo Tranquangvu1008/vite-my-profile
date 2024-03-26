@@ -36,23 +36,19 @@ function LayoutPage() {
       </Sider>
       <Layout>
         <Header
-          className={
-            darkTheme
-              ? 'p-0 flex justify-between items-center'
-              : 'p-0 flex justify-between items-center bg-white'
-          }
+          className={`p-0 flex justify-between items-center ${!darkTheme && 'bg-white'}`}
         >
           <button
             type='button'
-            className={darkTheme ? 'ml-4 text-xl text-white' : 'ml-4 text-xl text-black'}
+            className={`ml-4 text-xl ${darkTheme ? ' text-white' : 'text-black'}`}
             onClick={collapsedMenu}
           >
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </button>
           <ToggleThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
         </Header>
-        <div className={darkTheme ? 'overflow-y-auto h-svh-minus-64 bg-[#2c4b68] text-white' : 'overflow-y-auto h-svh-minus-64 bg-[#f7f3f3] text-black'}>
-          <Outlet context={collapsed} />
+        <div className={`overflow-y-auto h-svh-minus-64 ${darkTheme ? ' bg-[#2c4b68] text-white' : 'overflow-y-auto h-svh-minus-64 bg-[#f7f3f3] text-black'}`}>
+          <Outlet context={{ collapsed, darkTheme }} />
         </div>
       </Layout>
     </Layout>

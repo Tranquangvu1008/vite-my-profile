@@ -6,7 +6,10 @@ export const theme = {
     height: {
       'screen-minus-64': 'calc(100vh - 64px)',
       'svh-minus-64': 'calc(100svh - 64px)',
-    }
+    },
+    screens: {
+      'mobile': '530px',
+    },
   }
 };
 export const plugins = []
