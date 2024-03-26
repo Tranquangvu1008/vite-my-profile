@@ -7,7 +7,7 @@ interface ContactInfoCardProps {
     text: any
 }
 
-export const ContactInfoCard: React.FC<ContactInfoCardProps> = ({ iconUrl, text }) => {
+export const ContactInfoCard: React.FC<ContactInfoCardProps> = ({ text }) => {
     return (
         <div className='contact-details-card'>
             <div className='icon'>

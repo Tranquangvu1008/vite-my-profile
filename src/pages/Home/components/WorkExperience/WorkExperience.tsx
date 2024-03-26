@@ -6,11 +6,7 @@ import arrowLeftSVG from '../../assets/icons/arrow_left.svg'
 import arrowRightSVG from '../../assets/icons/arrow_right.svg'
 import { WORK_EXPERIENCE } from '../Skills/utils/data';
 
-type WorkExperienceProps = {
-    collapsed: boolean
-}
-
-export const WorkExperience = ({ collapsed }: WorkExperienceProps) => {
+export const WorkExperience = () => {
     const sliderRef = useRef<Slider | null>(null);
     const settings = {
         dots: false,

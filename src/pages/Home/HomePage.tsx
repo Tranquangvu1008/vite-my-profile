@@ -23,7 +23,7 @@ export const HomePage = () => {
         <div className='container'>
           <Hero collapsed={collapsed} />
           <Skills collapsed={collapsed} />
-          <WorkExperience collapsed={collapsed} />
+          <WorkExperience />
           {/* <ContactMe /> */}
         </div>
       </div>
