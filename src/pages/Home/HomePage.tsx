@@ -6,6 +6,7 @@ import { OutletContextType } from "../../interface";
 import { Skills } from "./components/Skills/Skills";
 import { WorkExperience } from "./components/WorkExperience/WorkExperience";
 import { Languages } from "./components/Languages/Languages";
+import { CV } from "./components/CV/CV";
 
 export const HomePage = () => {
   const { collapsed } = useOutletContext<OutletContextType>();
@@ -26,7 +27,7 @@ export const HomePage = () => {
           <Skills collapsed={collapsed} />
           <WorkExperience />
           <Languages />
-          {/* <ContactMe /> */}
+          <CV />
         </div>
       </div>
     </div>

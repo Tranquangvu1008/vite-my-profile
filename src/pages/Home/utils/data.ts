@@ -82,3 +82,16 @@ export const WORK_EXPERIENCE = [
         technology: "Technology: Flutter (Dart), Gitlab, Jira."
     }
 ]
+
+export const LANGUAGES = [
+    {
+        title: "Vietnamese",
+        level: "Native",
+        iconUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png",
+    },
+    {
+        title: "English",
+        level: "Upper-Intermediate",
+        iconUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png",
+    }
+]
