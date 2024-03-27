@@ -57,7 +57,7 @@ export const WORK_EXPERIENCE = [
     },
     {
         title: "FPT Software (AIRFORCE1 – KANSAI AIRPORT GROUP)",
-        date: "Apr 2022 - Dec 2023",
+        date: "Apr 2022 - Now",
         role: "Front-end Developer and Devops",
         responsibilities: [
             "Program the application’s interface using ReactJS.",
