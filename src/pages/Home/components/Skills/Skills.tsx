@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SkillsCard } from './SkillCard/SkillsCard.js'
 import './Skills.scss'
 import { SkillsInfoCard } from './SkillsInfoCard/SkillsInfoCard.js'
-import { SKILLS } from './utils/data.js'
+import { SKILLS } from '../../utils/data.js'
 
 type SkillsProps = {
     collapsed: boolean
@@ -15,7 +15,7 @@ export const Skills = ({ collapsed }: SkillsProps) => {
         setSelectedSkill(data)
     }
     return (
-        <section id="elem1" className='skills-container'>
+        <section className='skills-container'>
             <h5>Technical Proficiency</h5>
             <div className='skills-content'>
                 <div className={`skills ${!collapsed && 'sm:!grid-cols-2 !grid-cols-1'}`}>

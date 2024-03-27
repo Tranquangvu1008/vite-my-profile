@@ -4,7 +4,7 @@ import { ExperienceCard } from './ExperienceCard/ExperienceCard'
 import Slider from "react-slick";
 import arrowLeftSVG from '../../assets/icons/arrow_left.svg'
 import arrowRightSVG from '../../assets/icons/arrow_right.svg'
-import { WORK_EXPERIENCE } from '../Skills/utils/data';
+import { WORK_EXPERIENCE } from '../../utils/data';
 
 export const WorkExperience = () => {
     const sliderRef = useRef<Slider | null>(null);
@@ -38,7 +38,7 @@ export const WorkExperience = () => {
         }
     }
     return (
-        <section id="elem2" className='experience-container'>
+        <section className='experience-container'>
             <h5>Work Experience</h5>
             <div className='experience-content'>
                 <div className='arrow-right' onClick={slideRight}>

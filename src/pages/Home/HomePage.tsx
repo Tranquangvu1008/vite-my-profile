@@ -5,6 +5,7 @@ import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "../../interface";
 import { Skills } from "./components/Skills/Skills";
 import { WorkExperience } from "./components/WorkExperience/WorkExperience";
+import { Languages } from "./components/Languages/Languages";
 
 export const HomePage = () => {
   const { collapsed } = useOutletContext<OutletContextType>();
@@ -24,6 +25,7 @@ export const HomePage = () => {
           <Hero collapsed={collapsed} />
           <Skills collapsed={collapsed} />
           <WorkExperience />
+          <Languages />
           {/* <ContactMe /> */}
         </div>
       </div>
