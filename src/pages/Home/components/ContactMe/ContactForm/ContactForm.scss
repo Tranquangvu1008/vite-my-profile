@@ -1,63 +1,68 @@
 .contact-form-content {
-    width: 100%;
+  width: 100%;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    grid-gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1.5rem;
 }
 
 .name-container {
-    display: flex;
-    align-items: center;
-    grid-gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  grid-gap: 1.5rem;
+  flex: 1;
 }
 
 form input,
 form textarea {
-    flex: 1;
-    width: 100%;
-    font-size: 0.9rem;
-    counter-reset: #fff;
-    background: #130f2a;
-    border-radius: 0.6rem;
-    border: 1.5px solid #6751b9;
-    padding: 1rem;
+  flex: 1;
+  width: 100%;
+  font-size: 0.9rem;
+  counter-reset: #fff;
+  background: transparent;
+  border-radius: 0.6rem;
+  border: 1.5px solid #03a7ff;
+  padding: 1rem;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: #03a7ff;
 }
 
 form button {
-    font-size: 1rem;
-    font-weight: 500;
-    columns: #fff;
-    border: 1.5px solid #a892fe;
-    border-radius: 0.6rem;
-    background: linear-gradient(90deg, #a892fe 0%, #8064e8 100%);
-    padding: 0.7rem;
-    transition: all 0.3s ease;
-    cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  columns: #fff;
+  border: 1.5px solid #03a7ff;
+  border-radius: 0.6rem;
+  background: #03a7ff;
+  padding: 0.7rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 form button:hover {
-    color: #a892fe;
-    background: transparent;
+  background: transparent;
 }
 
-@media (max-width: 450px) {
-    .name-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+@media (max-width: 425px) {
+  .name-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    form input,
-    form textarea {
-        padding: 0.7rem;
-        border-radius: 0.3rem;
-    }
+  form input,
+  form textarea {
+    padding: 0.7rem;
+    border-radius: 0.3rem;
+  }
 
-    form button {
-        font-size: 0.9rem;
-        padding: 0.7rem;
-        border-radius: 0.3rem;
-    }
+  form button {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+    border-radius: 0.3rem;
+  }
 }

@@ -5,17 +5,17 @@
 .contact-container h5 {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 3rem;
+  margin-bottom: 2em;
 }
 
 .contact-content {
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 @media (max-width: 768px) {
   .contact-content {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .contact-container h5 {

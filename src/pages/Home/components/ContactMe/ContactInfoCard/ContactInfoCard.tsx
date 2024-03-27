@@ -1,19 +1,21 @@
 import React from 'react'
 import './ContactInfoCard.scss'
-import logoSVG from "../../../assets/icons/zalo.svg"
 
 interface ContactInfoCardProps {
     iconUrl: any,
-    text: any
+    text: any,
+    label: string
 }
 
-export const ContactInfoCard: React.FC<ContactInfoCardProps> = ({ text }) => {
+export const ContactInfoCard: React.FC<ContactInfoCardProps> = ({ iconUrl, text, label }) => {
     return (
         <div className='contact-details-card'>
             <div className='icon'>
-                <img src={logoSVG} alt={text} />
+                <img src={iconUrl} alt={text} />
             </div>
-            <p>{text}</p>
+            <a href={`${label === "phone" ? "tel:+84852602740" : "mailto:tranquangvu1008@gmail.com"}`}>
+                <p>{text}</p>
+            </a>
         </div>
     )
 }
