@@ -30,7 +30,7 @@ function LayoutPage() {
 
   return (
     <Layout>
-      <Sider collapsed={collapsed} collapsible trigger={null} theme={darkTheme ? 'dark' : 'light'} className='text-white h-svh '>
+      <Sider collapsed={collapsed} collapsible trigger={null} theme={darkTheme ? 'dark' : 'light'} className='text-white h-vh '>
         <Logo darkTheme={darkTheme} collapsed={collapsed} />
         <MenuList darkTheme={darkTheme} />
       </Sider>
