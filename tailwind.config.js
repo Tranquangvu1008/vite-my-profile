@@ -5,7 +5,7 @@ export const theme = {
   extend: {
     height: {
       'screen-minus-64': 'calc(100vh - 64px)',
-      'svh-minus-64': 'calc(100svh - 64px)',
+      'vh-minus-64': 'calc(100vh - 64px)',
     },
     screens: {
       'mobile': '530px',
