@@ -1,4 +1,4 @@
-export const FormSection = ({ register, errors, modeEdit, handleSubmit, onSubmit, darkTheme }: any) => {
+export const FormSection = ({ register, errors, modeEdit, handleSubmit, onSubmit }: any) => {
     return (
 
         <section className=" px-10 py-5 flex md:flex-row flex-col gap-[10%] shadow-lg">
