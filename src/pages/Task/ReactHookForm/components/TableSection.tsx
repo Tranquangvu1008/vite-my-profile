@@ -10,7 +10,6 @@ export const TableSection = ({ headers, currentRecords, deleteItem, showItemUpda
                             ))}
                         </tr>
                     </thead>
-                    <div className="mt-2" />
                     <tbody>
                         {currentRecords.length > 0 ? currentRecords.map((item: any) => (
                             <tr key={item.id}>

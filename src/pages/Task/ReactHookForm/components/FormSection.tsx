@@ -1,7 +1,7 @@
 export const FormSection = ({ register, errors, modeEdit, handleSubmit, onSubmit }: any) => {
     return (
 
-        <section className=" px-10 py-5 flex md:flex-row flex-col gap-[10%] shadow-lg">
+        <section className="sm:px-10 px-5 py-5 flex md:flex-row flex-col md:gap-[10%] gap-5 shadow-lg">
             <div className="">
                 <h3 className='font-medium text-lg'>Personal Details</h3>
                 <h6 className="'text-black font-normal">Please fill out all the fields.</h6>
@@ -26,14 +26,14 @@ export const FormSection = ({ register, errors, modeEdit, handleSubmit, onSubmit
                             <p className='mt-1 text-red-500'>Email cannot exceed 30 characters</p>
                         )}
                     </div>
-                    <div className="flex sm:flex-row flex-col gap-4">
-                        <div className="flex flex-col flex-[2] self-baseline gap-1">
+                    <div className="flex sm:flex-row flex-col sm:gap-4 gap-2">
+                        <div className="flex flex-col sm:flex-[2] w-full self-baseline gap-1">
                             <label htmlFor="address">Address / Street</label>
                             <input {...register("address", { required: true })} type="text"
                                 className="pl-4 py-2 rounded-md border-[1px] border-gray-400 border-solid" />
                             {errors?.address?.type === "required" && <p className='mt-1 text-red-400'>* This field is required</p>}
                         </div>
-                        <div className="flex flex-col flex-[1] self-baseline gap-1">
+                        <div className="flex flex-col sm:flex-[1] w-full self-baseline gap-1">
                             <label htmlFor="city">City</label>
                             <input {...register("city", { required: true })} type="text"
                                 className="pl-4 py-2 rounded-md border-[1px] border-gray-400 border-solid" />
