@@ -6,18 +6,18 @@ export const TableSection = ({ headers, currentRecords, deleteItem, showItemUpda
                     <thead>
                         <tr className="shadow-lg">
                             {headers.map((header: any, index: number) => (
-                                <th key={index} className="text-left px-4 py-2 w-[300px]">{header}</th>
+                                <th key={index} className="text-left px-4 py-2 w-[200px]">{header}</th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
                         {currentRecords.length > 0 ? currentRecords.map((item: any) => (
                             <tr key={item.id}>
-                                <td className="px-4 py-2 break-words w-[300px]">{item.fullName}</td>
-                                <td className="px-4 py-2 break-words w-[300px]">{item.email}</td>
-                                <td className="px-4 py-2 break-words w-[300px]">{item.address}, {item.city}</td>
-                                <td className="px-4 py-2 break-words w-[300px]">{item.country}</td>
-                                <td className="px-4 py-2 break-words w-[300px]">
+                                <td className="px-4 py-2 break-words w-[200px]">{item.fullName}</td>
+                                <td className="px-4 py-2 break-words w-[200px]">{item.email}</td>
+                                <td className="px-4 py-2 break-words w-[200px]">{item.address}, {item.city}</td>
+                                <td className="px-4 py-2 break-words w-[200px]">{item.country}</td>
+                                <td className="px-4 py-2 break-words w-[200px]">
                                     <button className="text-blue-500 pr-2" onClick={() => showItemUpdate(item.id)}>Edit</button>
                                     <button className="text-red-500" onClick={() => deleteItem(item.id)}>Delete</button>
                                 </td>
