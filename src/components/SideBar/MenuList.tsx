@@ -1,4 +1,4 @@
-import { BarsOutlined, HomeOutlined, InfoCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons'
+import { BarsOutlined, ContactsOutlined, FormOutlined, HomeOutlined, QuestionCircleOutlined, SpotifyOutlined } from '@ant-design/icons'
 import { Menu, MenuProps } from 'antd'
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -24,8 +24,12 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem('Home', 'home', <HomeOutlined />, undefined, '/'),
-  getItem('Task', 'subTasks', <BarsOutlined />, [getItem('Question Board', 'questionBoard', <QuestionCircleOutlined />, undefined, '/questionboard')]),
-  getItem('About', 'about', <InfoCircleOutlined />, undefined, '/about')
+  getItem('Music', 'music', <SpotifyOutlined />, undefined, '/music'),
+  getItem('Task', 'subTasks', <BarsOutlined />, [
+    getItem('Question Board', 'questionBoard', <QuestionCircleOutlined />, undefined, '/questionBoard'),
+    getItem('React Hook Form', 'reactHookForm', <FormOutlined />, undefined, '/reactHookForm')
+  ]),
+  getItem('Contact', 'contact', <ContactsOutlined />, undefined, '/contact')
 ]
 
 interface MenuListProps {

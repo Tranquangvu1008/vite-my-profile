@@ -65,7 +65,7 @@ export const ContactForm = () => {
                         <p className='mt-1 text-red-400'>Message cannot exceed 200 characters</p>
                     )}
                 </div>
-                <button>SEND</button>
+                <button className='btnSend'>SEND</button>
             </form>
         </div>
     )

@@ -1,5 +1,5 @@
 export const content = [
-  './src/**/*.{js,jsx,ts,tsx}' // Đường dẫn đến tất cả các file JavaScript và TypeScript trong dự án của bạn
+  './src/**/*.{js,jsx,ts,tsx}'
 ];
 export const theme = {
   extend: {

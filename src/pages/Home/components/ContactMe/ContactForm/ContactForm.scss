@@ -32,7 +32,7 @@ form textarea::placeholder {
   color: #03a7ff;
 }
 
-form button {
+.btnSend {
   font-size: 1rem;
   font-weight: 500;
   columns: #fff;
@@ -44,7 +44,7 @@ form button {
   cursor: pointer;
 }
 
-form button:hover {
+.btnSend:hover {
   background: transparent;
 }
 
