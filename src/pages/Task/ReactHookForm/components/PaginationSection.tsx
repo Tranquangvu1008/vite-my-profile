@@ -9,7 +9,7 @@ export const PaginationSection = ({ goToPrevPage, goToNextPage, currentRecords }
             </div>
             <div className="flex">
                 <button className="flex flex-col sm:flex-row gap-1 items-center bg-[#1f40af] text-white px-2 rounded-l-lg" onClick={goToPrevPage}>
-                    <img src={arrowRight} alt="" className="w-8 text-white" />
+                    <img src={arrowLeft} alt="" className="w-8 text-white" />
                     <p>Prev</p>
                 </button>
                 <div className="w-[1px] bg-black" />
