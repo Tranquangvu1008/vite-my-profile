@@ -1,11 +1,13 @@
 import './ContactPage.scss'
+import contactImg from '/src/assets/images/i5.png'
+
 export const ContactPage = () => {
     return (
         <div>
             <section className="">
                 <div className="flex flex-col md:flex-row justify-center md:my-auto px-5 items-center gap-10 h-screen-minus-64">
                     <div className="">
-                        <figure><img className="w-auto" src="/src/assets/images/i5.png" alt="" /></figure>
+                        <figure><img className="w-auto" src={contactImg} alt="" /></figure>
                     </div>
                     <div className="flex flex-col items-start gap-5">
                         <h2 className="uppercase lg:text-2xl text-base text-[#3f78e0]">Get In Touch</h2>
