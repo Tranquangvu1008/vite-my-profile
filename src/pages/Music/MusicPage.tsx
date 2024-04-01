@@ -3,8 +3,12 @@ import { SpotifyPage } from "./components/Spotify/SpotifyPage";
 import LoginPage from "./components/Login/LoginPage";
 import { useStateProvider } from "../../utils/StateProvider";
 import { SET_TOKEN } from "../../utils/Constants";
+import { useOutletContext } from "react-router-dom";
+import { OutletContextType } from "../../interface";
 
 export const MusicPage = () => {
+    const { collapsed } = useOutletContext<OutletContextType>();
+
     const [{ token }, dispatch] = useStateProvider();
     useLayoutEffect(() => {
         const token = localStorage.getItem("token");
@@ -29,7 +33,7 @@ export const MusicPage = () => {
     }, [dispatch, token]);
     return (
         <div>
-            {token ? <SpotifyPage /> : <LoginPage />}
+            {token ? <SpotifyPage /> : <LoginPage collapsed={collapsed} />}
         </div>
     )
 }

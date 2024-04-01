@@ -4,8 +4,6 @@ import { HeaderSection } from "./components/HeaderSection";
 import { FormSection } from "./components/FormSection";
 import { TableSection } from "./components/TableSection";
 import { PaginationSection } from "./components/PaginationSection";
-import { useOutletContext } from "react-router-dom";
-import { OutletContextType } from "../../../interface";
 
 interface IFormInput {
     id: number;
@@ -19,7 +17,6 @@ interface IFormInput {
 const headers = Array.of("FULL NAME", "EMAIL ADDRESS", "ADDRESS", "COUNTRY", "ACTION");
 
 export const ReactHookForm = () => {
-    const { darkTheme } = useOutletContext<OutletContextType>();
     const [listUserInfo, setListUserInfo] = useState<IFormInput[]>([]);
     const [modeEdit, setModeEdit] = useState(false)
     const formOptions = { defaultValues: { fullName: '', email: '', address: '', city: '' } };
@@ -105,7 +102,6 @@ export const ReactHookForm = () => {
                     modeEdit={modeEdit}
                     handleSubmit={handleSubmit}
                     onSubmit={onSubmit}
-                    darkTheme={darkTheme}
                 />
                 {/* Display data */}
                 <TableSection

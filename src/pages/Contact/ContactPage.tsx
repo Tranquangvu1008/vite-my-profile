@@ -3,38 +3,38 @@ export const ContactPage = () => {
     return (
         <div>
             <section className="">
-                <div className="flex items-center justify-center gap-10 h-screen-minus-64 my-auto">
+                <div className="flex flex-col md:flex-row justify-center md:my-auto px-5 items-center gap-10 h-screen-minus-64">
                     <div className="">
                         <figure><img className="w-auto" src="/src/assets/images/i5.png" alt="" /></figure>
                     </div>
-                    <div className="flex flex-col items-start ">
-                        <h2 className="uppercase text-1xl">Get In Touch</h2>
-                        <h3 className="text-2xl">Got any questions? Don't hesitate to get in touch.</h3>
-                        <div className="">
+                    <div className="flex flex-col items-start gap-5">
+                        <h2 className="uppercase lg:text-2xl text-base text-[#3f78e0]">Get In Touch</h2>
+                        <h3 className=" lg:text-3xl text-lg max-w-sm">Got any questions? Don't hesitate to get in touch.</h3>
+                        <div className="lg:mt-5">
                             <div>
                                 <div className=""> <i className="uil uil-location-pin-alt"></i> </div>
                             </div>
-                            <div>
-                                <h5 className="">Address</h5>
-                                <address>Moonshine St. 14/05 Light City, London</address>
+                            <div className='flex flex-col gap-1'>
+                                <h5 className="font-bold lg:text-lg text-base">Address</h5>
+                                <address className='lg:text-base text-sm'>Di An City, Binh Duong province</address>
                             </div>
                         </div>
                         <div className="">
                             <div>
                                 <div className=""> <i className=""></i> </div>
                             </div>
-                            <div>
-                                <h5 className="">Phone</h5>
-                                <p>00 (123) 456 78 90</p>
+                            <div className='flex flex-col gap-1'>
+                                <h5 className="font-bold lg:text-lg text-base">Phone</h5>
+                                <a className='lg:text-base text-sm' href='tel:+84852602740'>+84852 602 740</a>
                             </div>
                         </div>
                         <div className="">
                             <div>
                                 <div className=""> <i className="uil uil-envelope"></i> </div>
                             </div>
-                            <div>
-                                <h5 className="">E-mail</h5>
-                                <p className=""><a href="mailto:sandbox@email.com" className="">sandbox@email.com</a></p>
+                            <div className='flex flex-col gap-1'>
+                                <h5 className="font-bold lg:text-lg text-base">E-mail</h5>
+                                <a className='lg:text-base text-sm' href="mailto:tranquangvu1008@gmail.com">tranquangvu1008@gmail.com</a>
                             </div>
                         </div>
                     </div>
