@@ -1,26 +1,23 @@
-import { SET_PLAYER_STATE, SET_PLAYING, SET_PLAYLIST, SET_PLAYLISTS, SET_PLAYLIST_ID, SET_TOKEN, SET_USER } from "./Constants";
+import { SET_PLAYER_STATE, SET_TOKEN, SET_TOP_ARTISTS, SET_TOP_TRACKS, SET_USER } from "./Constants";
 
 type State = {
     token: string | null;
     userInfo: any;
-    playlists: any[];
-    currentPlaying: any;
-    playerState: boolean;
-    selectedPlaylist: any;
-    selectedPlaylistId: string;
+    playbackState: boolean;
+    topArtist: any;
+    topTracks: any;
 };
 
 export const initialState: State = {
     token: null,
     userInfo: null,
-    playlists: [],
-    currentPlaying: null,
-    playerState: false,
-    selectedPlaylist: null,
-    selectedPlaylistId: "37i9dQZF1E37jO8SiMT0yN",
+    playbackState: false,
+    topArtist: false,
+    topTracks: false
 };
 
 const reducer = (state: State, action: any) => {
+
     switch (action.type) {
         case SET_TOKEN:
             return {
@@ -32,31 +29,31 @@ const reducer = (state: State, action: any) => {
                 ...state,
                 userInfo: action.userInfo,
             };
-        case SET_PLAYLISTS:
-            return {
-                ...state,
-                playlists: action.playlists,
-            };
-        case SET_PLAYING:
-            return {
-                ...state,
-                currentPlaying: action.currentPlaying,
-            };
         case SET_PLAYER_STATE:
             return {
                 ...state,
-                playerState: action.playerState,
+                playbackState: action.playbackState,
             };
-        case SET_PLAYLIST:
+        case SET_TOP_ARTISTS:
             return {
                 ...state,
-                selectedPlaylist: action.selectedPlaylist,
+                topArtist: action.topArtist,
             };
-        case SET_PLAYLIST_ID:
+        case SET_TOP_TRACKS:
             return {
                 ...state,
-                selectedPlaylistId: action.selectedPlaylistId,
+                topTracks: action.topTracks,
             };
+        // case SET_PLAYLIST:
+        //     return {
+        //         ...state,
+        //         selectedPlaylist: action.selectedPlaylist,
+        //     };
+        // case SET_PLAYLIST_ID:
+        //     return {
+        //         ...state,
+        //         selectedPlaylistId: action.selectedPlaylistId,
+        //     };
         default:
             return state;
     }
