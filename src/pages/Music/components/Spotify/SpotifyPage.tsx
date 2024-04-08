@@ -39,14 +39,16 @@ export const SpotifyPage = () => {
         const getUserTopItem = async () => {
             const topTracks = await getTopItem('tracks')
             dispatch({ type: SET_TOP_TRACKS, topTracks });
+            console.log(topTracks);
+
         };
         getUserTopItem();
     }, [dispatch, token])
 
     useEffect(() => {
         const getNewRelease = async () => {
-            const data = await getNewReleaseAlbum()
-            dispatch({ type: SET_NEW_RELEASE_ALBUM, data });
+            const newReleaseAlbum = await getNewReleaseAlbum()
+            dispatch({ type: SET_NEW_RELEASE_ALBUM, newReleaseAlbum });
         };
         getNewRelease();
     }, [dispatch, token])

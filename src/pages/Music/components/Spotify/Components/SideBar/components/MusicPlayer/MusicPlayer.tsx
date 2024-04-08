@@ -15,7 +15,6 @@ function MusicPlayer() {
                 <div className="song-title">JUNOON</div>
                 <div className="artist-name">MITRAZ</div>
             </div>
-
             <div className='flex items-center justify-center gap-8'>
                 <div className="shuffle">
                     <BsShuffle />
@@ -38,7 +37,7 @@ function MusicPlayer() {
                     <FiRepeat />
                 </div>
             </div>
-            <div className='flex justify-end content-center pt-4 gap-1'>
+            <div className='flex justify-end pt-4 gap-1'>
                 <FaVolumeDown />
                 <input className='rounded-[2rem] leading-[0.5rem]' type="range" onMouseUp={(e) => { }
                     // setVolume(e)

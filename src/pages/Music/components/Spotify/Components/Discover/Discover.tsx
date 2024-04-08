@@ -5,15 +5,18 @@ import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useStateProvider } from '../../../../../../utils/StateProvider';
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { Artist } from '../../../../../../models/Music/artist';
+import { Artist } from '../../../../../../models/Music/Artist';
+import { Track } from '../../../../../../models/Music/Track';
 
 export const Discover = () => {
-    const [{ topArtist, topTracks }, dispatch] = useStateProvider();
+    const [{ topArtist, topTracks, newReleaseAlbum }, dispatch] = useStateProvider();
     const [favArtist, setFavArtist] = useState<Artist[]>([])
+    const [favTracks, setFavTracks] = useState<Track[]>([])
 
     useLayoutEffect(() => {
-        setFavArtist(() => topArtist.items)
-    }, [topArtist])
+        setFavArtist(topArtist.items)
+        setFavTracks(topTracks.items)
+    }, [topArtist, topTracks])
 
     return (
         <div className="px-10 overflow-x-auto">
@@ -34,7 +37,7 @@ export const Discover = () => {
                                 }
                             }}
                         >
-                            {favArtist && favArtist.length > 0 && favArtist.map((value: any, index: any) => (
+                            {favArtist && favArtist.length > 0 && favArtist.map((value: Artist, index: any) => (
                                 <SwiperSlide key={index}>
                                     <div className='text-center'>
                                         <img src={value.images[0].url} alt='artist' className='max-w-[82px] max-h-[82px] w-[10vw] h-[10vw] object-cover rounded-full mb-[10px] mx-auto' />
@@ -67,12 +70,12 @@ export const Discover = () => {
                                 }
                             }}
                         >
-                            {[...Array(10)].map((_, index) => (
+                            {favTracks && favTracks.length > 0 && favTracks.map((value: Track, index) => (
                                 <SwiperSlide key={index}>
                                     <div className='text-center'>
-                                        <img src={artist} alt='artist' className='sm:w-[210px] sm:h-[248px] w-[110px] h-[148px] object-cover rounded-lg mb-[10px] mx-auto shadow-xl' />
-                                        <h4 className='font-semibold sm:text-[18px] text-[14px]'>Tên bài hát</h4>
-                                        <p className='font-light sm:text-[16px] text-[12px]'>Tên nghệ sĩ</p>
+                                        <img src={value.album.images[0].url} alt='artist' className='sm:w-[210px] sm:h-[248px] w-[110px] h-[148px] object-cover rounded-lg mb-[10px] mx-auto shadow-xl' />
+                                        <h4 className='font-semibold sm:text-[18px] text-[14px]'>{value.name}</h4>
+                                        <p className='font-light sm:text-[16px] text-[12px]'>{value.artists[0].name}</p>
                                     </div>
                                 </SwiperSlide>
                             ))}

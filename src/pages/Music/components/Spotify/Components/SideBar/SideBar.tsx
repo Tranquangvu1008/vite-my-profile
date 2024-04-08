@@ -4,7 +4,7 @@ import artist from '/src/pages/Music/assets/images/artist.jpg'
 export const SideBar = () => {
     return (
         <div className="flex-1 overflow-hidden">
-            <div className="flex flex-col py-[30px] px-[30px] justify-between h-screen-minus-64 gap-5">
+            <div className="flex flex-col py-[3%] px-[30px] justify-between h-screen-minus-64 gap-5">
                 <div>
                     <h4 className="font-semibold text-[20px]">Library</h4>
                     <div className='flex flex-col gap-3 pt-3'>
