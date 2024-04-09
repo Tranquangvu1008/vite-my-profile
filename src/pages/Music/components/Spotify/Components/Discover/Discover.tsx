@@ -1,6 +1,7 @@
 import arrow from '/src/pages/Music/assets/icons/arrow.svg'
 
 import 'swiper/css';
+import './Discover.scss'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useStateProvider } from '../../../../../../utils/StateProvider';
 import { useLayoutEffect, useState } from 'react';
@@ -8,7 +9,7 @@ import { Artist } from '../../../../../../models/Music/Artist';
 import { Track } from '../../../../../../models/Music/Track';
 import { Album } from '../../../../../../models/Music/Album';
 import { playMusicSpotify } from '../../../../../../services/Music/MusicServices';
-import { PLAY_MUSIC } from '../../../../../../utils/Constants';
+import { FavoriteTrack } from './Components/FavoriteTrack';
 
 export const Discover = () => {
     const [{ topArtist, topTracks, newReleaseAlbum }, dispatch] = useStateProvider();
@@ -24,18 +25,20 @@ export const Discover = () => {
         }
     }, [topArtist, topTracks, newReleaseAlbum])
 
-    const playMusic = async () => {
-        //https://open.spotify.com/track/1K0HQ30Wc11okzlcnFA7Ub?si=f24ee91cea14488b
-        //https://open.spotify.com/album/4faMbTZifuYsBllYHZsFKJ?si=z-17AbwfQWOpQeyYv9AxOQ
-        const music = await playMusicSpotify('track', '1K0HQ30Wc11okzlcnFA7Ub')
-        dispatch({ type: PLAY_MUSIC, music });
+    const playMusic = async (type: string, uri: any) => {
+        await playMusicSpotify(type, uri);
+        // await new Promise(resolve => setTimeout(resolve, 500));
+        // const playing = await getCurrentPlaying();
+        // dispatch({ type: SET_CURRENT_PLAYING, playing });
+        // console.log(playing);
+
     };
 
     return (
         <div className="px-10 overflow-x-auto">
             <div className="flex flex-col gap-[40px] mb-10">
                 <div>
-                    <button onClick={() => { playMusic() }}>Play</button>
+                    {/* <button onClick={() => localStorage.removeItem('token')}>clear</button> */}
                     <div className="flex justify-between mb-[19px]">
                         <h2 className="font-bold text-[20px]">Your favorite artists</h2>
                         <button className="flex font-light text-[15px] items-center"><p>View all</p><img src={arrow} alt='arrow' /></button>
@@ -86,11 +89,7 @@ export const Discover = () => {
                         >
                             {favTracks && favTracks.length > 0 && favTracks.map((value: Track, index) => (
                                 <SwiperSlide key={index}>
-                                    <div className='text-center'>
-                                        <img src={value.album.images[0].url} alt='artist' className='sm:w-[210px] w-[110px] object-contain rounded-lg mb-[10px] mx-auto shadow-xl' />
-                                        <h4 className='font-semibold sm:text-[18px] text-[14px]'>{value.name}</h4>
-                                        <p className='font-light sm:text-[16px] text-[12px]'>{value.artists[0].name}</p>
-                                    </div>
+                                    <FavoriteTrack key={index} value={value} playMusic={playMusic} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

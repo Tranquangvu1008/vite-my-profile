@@ -1,4 +1,3 @@
-// File này sẽ import reducer và initialState từ file reducer.ts
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 import reducer, { initialState } from './Reducer';
 

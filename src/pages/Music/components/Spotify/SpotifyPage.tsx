@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useStateProvider } from '../../../../utils/StateProvider';
-import { SET_MY_PLAYLIST, SET_NEW_RELEASE_ALBUM, SET_PLAYER_STATE, SET_TOP_ARTISTS, SET_TOP_TRACKS, SET_USER } from '../../../../utils/Constants';
-import { getMyPlaylist, getNewReleaseAlbum, getPlayback, getTopItem, loginSpotify } from '../../../../services/Music/MusicServices';
+import { SET_CURRENT_PLAYING, SET_MY_PLAYLIST, SET_NEW_RELEASE_ALBUM, SET_PLAYER_STATE, SET_TOP_ARTISTS, SET_TOP_TRACKS, SET_USER } from '../../../../utils/Constants';
+import { getCurrentPlaying, getMyPlaylist, getNewReleaseAlbum, getPlayback, getTopItem, loginSpotify } from '../../../../services/Music/MusicServices';
 import { NavBar } from './NavBar/NavBar';
 import { Route, Routes } from 'react-router-dom';
 import { Discover } from './Components/Discover/Discover';
@@ -59,13 +59,13 @@ export const SpotifyPage = () => {
         getMyPlaylistSpotify();
     }, [dispatch, token])
 
-    // useEffect(() => {
-    //     const playMusic = async () => {
-    //         const music = await playMusicSpotify()
-    //         dispatch({ type: PLAY_MUSIC, music });
-    //     };
-    //     playMusic();
-    // }, [dispatch, token])
+    useEffect(() => {
+        const getCurrentPlayingSpotify = async () => {
+            const playing = await getCurrentPlaying()
+            dispatch({ type: SET_CURRENT_PLAYING, playing });
+        };
+        getCurrentPlayingSpotify();
+    }, [dispatch, token])
 
     return (
         <div className='flex flex-col h-screen-minus-64'>
