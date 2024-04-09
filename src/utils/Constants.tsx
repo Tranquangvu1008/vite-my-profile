@@ -1,6 +1,8 @@
-export const SET_TOKEN = "SET_TOKEN";
-export const SET_USER = "SET_USER";
-export const SET_PLAYER_STATE = "SET_PLAYER_STATE";
+export const SET_TOKEN = "SET_TOKEN"
+export const SET_USER = "SET_USER"
+export const SET_PLAYER_STATE = "SET_PLAYER_STATE"
 export const SET_TOP_ARTISTS = "SET_TOP_ARTISTS"
 export const SET_TOP_TRACKS = "SET_TOP_TRACKS"
 export const SET_NEW_RELEASE_ALBUM = "SET_NEW_RELEASE_ALBUM"
+export const SET_MY_PLAYLIST = "SET_MY_PLAYLIST"
+export const PLAY_MUSIC = "PLAY_MUSIC"

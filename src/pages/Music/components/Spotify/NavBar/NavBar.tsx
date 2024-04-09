@@ -46,12 +46,12 @@ export const NavBar = () => {
                     </ul>
                 </div>
                 <input className="h-[31px] my-auto px-4 rounded-[35px] text-black" type="text" name="search" placeholder="Search" />
-                <div className="h-[31px] my-auto relative">
+                <div className="h-[31px] my-auto relative bg-red">
                     <button className="menu-button" onClick={toggleMenu}>
                         <img className="pl-[66px] mb-2" src={ExpandedIcon} alt="Expand menu" />
                     </button>
                     {isMenuOpen && (
-                        <div className="flex flex-col absolute bg-transparent shadow-xl p-2">
+                        <div className="flex flex-col absolute bg-[#2c4b68] shadow-xl p-2 z-[2]">
                             <a href="#" className="whitespace-nowrap p-2 hover:bg-gray-500">Menu Item 1</a>
                             <a href="#" className="whitespace-nowrap p-2 hover:bg-gray-500">Menu Item 2</a>
                             <a href="#" className="whitespace-nowrap p-2 hover:bg-gray-500">Menu Item 3</a>

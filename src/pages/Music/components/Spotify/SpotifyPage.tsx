@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useStateProvider } from '../../../../utils/StateProvider';
-import { SET_NEW_RELEASE_ALBUM, SET_PLAYER_STATE, SET_TOP_ARTISTS, SET_TOP_TRACKS, SET_USER } from '../../../../utils/Constants';
-import { getNewReleaseAlbum, getPlayback, getTopItem, loginSpotify } from '../../../../services/Music/MusicServices';
+import { SET_MY_PLAYLIST, SET_NEW_RELEASE_ALBUM, SET_PLAYER_STATE, SET_TOP_ARTISTS, SET_TOP_TRACKS, SET_USER } from '../../../../utils/Constants';
+import { getMyPlaylist, getNewReleaseAlbum, getPlayback, getTopItem, loginSpotify } from '../../../../services/Music/MusicServices';
 import { NavBar } from './NavBar/NavBar';
 import { Route, Routes } from 'react-router-dom';
 import { Discover } from './Components/Discover/Discover';
@@ -39,8 +39,6 @@ export const SpotifyPage = () => {
         const getUserTopItem = async () => {
             const topTracks = await getTopItem('tracks')
             dispatch({ type: SET_TOP_TRACKS, topTracks });
-            console.log(topTracks);
-
         };
         getUserTopItem();
     }, [dispatch, token])
@@ -52,6 +50,22 @@ export const SpotifyPage = () => {
         };
         getNewRelease();
     }, [dispatch, token])
+
+    useEffect(() => {
+        const getMyPlaylistSpotify = async () => {
+            const myPlaylist = await getMyPlaylist()
+            dispatch({ type: SET_MY_PLAYLIST, myPlaylist });
+        };
+        getMyPlaylistSpotify();
+    }, [dispatch, token])
+
+    // useEffect(() => {
+    //     const playMusic = async () => {
+    //         const music = await playMusicSpotify()
+    //         dispatch({ type: PLAY_MUSIC, music });
+    //     };
+    //     playMusic();
+    // }, [dispatch, token])
 
     return (
         <div className='flex flex-col h-screen-minus-64'>

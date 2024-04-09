@@ -7,13 +7,13 @@ import { FaVolumeDown, FaVolumeUp } from 'react-icons/fa';
 
 function MusicPlayer() {
     return (
-        <div className="music-player">
-            <div className="album-cover">
-                <img src={albumCover} alt="Album Cover" />
+        <div className="rounded-[20px] bg-transparent px-1 py-5 shadow-custom">
+            <div>
+                <img className="rounded-[10px] w-[80%] mx-auto" src={albumCover} alt="Album Cover" />
             </div>
-            <div className="song-info">
-                <div className="song-title">JUNOON</div>
-                <div className="artist-name">MITRAZ</div>
+            <div className="text-center my-[10px]">
+                <div className="">JUNOON</div>
+                <div className="">MITRAZ</div>
             </div>
             <div className='flex items-center justify-center gap-8'>
                 <div className="shuffle">

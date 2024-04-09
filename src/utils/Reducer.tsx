@@ -1,4 +1,4 @@
-import { SET_PLAYER_STATE, SET_TOKEN, SET_TOP_ARTISTS, SET_TOP_TRACKS, SET_USER } from "./Constants";
+import { SET_MY_PLAYLIST, SET_NEW_RELEASE_ALBUM, SET_PLAYER_STATE, SET_TOKEN, SET_TOP_ARTISTS, SET_TOP_TRACKS, SET_USER } from "./Constants";
 
 type State = {
     token: string | null;
@@ -6,6 +6,8 @@ type State = {
     playbackState: boolean;
     topArtist: any;
     topTracks: any;
+    newReleaseAlbum: any;
+    myPlaylist: any;
 };
 
 export const initialState: State = {
@@ -13,7 +15,9 @@ export const initialState: State = {
     userInfo: null,
     playbackState: false,
     topArtist: false,
-    topTracks: false
+    topTracks: false,
+    newReleaseAlbum: false,
+    myPlaylist: false
 };
 
 const reducer = (state: State, action: any) => {
@@ -44,16 +48,16 @@ const reducer = (state: State, action: any) => {
                 ...state,
                 topTracks: action.topTracks,
             };
-        // case SET_PLAYLIST:
-        //     return {
-        //         ...state,
-        //         selectedPlaylist: action.selectedPlaylist,
-        //     };
-        // case SET_PLAYLIST_ID:
-        //     return {
-        //         ...state,
-        //         selectedPlaylistId: action.selectedPlaylistId,
-        //     };
+        case SET_NEW_RELEASE_ALBUM:
+            return {
+                ...state,
+                newReleaseAlbum: action.newReleaseAlbum,
+            };
+        case SET_MY_PLAYLIST:
+            return {
+                ...state,
+                myPlaylist: action.myPlaylist,
+            };
         default:
             return state;
     }
