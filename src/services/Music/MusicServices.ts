@@ -40,17 +40,26 @@ export const getMyPlaylist = async () => {
     return data;
 };
 
-export const playMusicSpotify = async (deviceId: string) => {
-    console.log('deviceId', deviceId);
-    if (!deviceId) return
-    const { data } = await ApiService.put(`/me/player/play?device_id=${deviceId}`,
-        JSON.stringify({
-            "context_uri": "spotify:album:5ht7ItJgpBH7W6vJ5BqpPr",
-            "offset": {
-                "position": 0
-            },
-            "position_ms": 0
-        }),
+export const playMusicSpotify = async (type: string, idItem: string) => {
+    const payload: {
+        offset: { position: number };
+        position_ms: number;
+        [key: string]: any;
+    } = {
+        offset: {
+            position: 0
+        },
+        position_ms: 0
+    };
+
+    if (type === 'album') {
+        payload.context_uri = `spotify:${type}:${idItem}`;
+    } else {
+        payload.uris = [`spotify:${type}:${idItem}`];
+    }
+
+    const { data } = await ApiService.put(`/me/player/play?device_id=${localStorage.getItem('deviceId')}`,
+        payload,
     );
     return data;
 };

@@ -7,10 +7,11 @@ import { useLayoutEffect, useState } from 'react';
 import { Artist } from '../../../../../../models/Music/Artist';
 import { Track } from '../../../../../../models/Music/Track';
 import { Album } from '../../../../../../models/Music/Album';
-import SpotifyPlayer from '../../../../../../helpers/SpotifyPlayer';
+import { playMusicSpotify } from '../../../../../../services/Music/MusicServices';
+import { PLAY_MUSIC } from '../../../../../../utils/Constants';
 
 export const Discover = () => {
-    const [{ topArtist, topTracks, newReleaseAlbum }] = useStateProvider();
+    const [{ topArtist, topTracks, newReleaseAlbum }, dispatch] = useStateProvider();
     const [favArtist, setFavArtist] = useState<Artist[]>([])
     const [favTracks, setFavTracks] = useState<Track[]>([])
     const [newAlbum, setNewAlbum] = useState<Album[]>([])
@@ -23,11 +24,18 @@ export const Discover = () => {
         }
     }, [topArtist, topTracks, newReleaseAlbum])
 
+    const playMusic = async () => {
+        //https://open.spotify.com/track/1K0HQ30Wc11okzlcnFA7Ub?si=f24ee91cea14488b
+        //https://open.spotify.com/album/4faMbTZifuYsBllYHZsFKJ?si=z-17AbwfQWOpQeyYv9AxOQ
+        const music = await playMusicSpotify('track', '1K0HQ30Wc11okzlcnFA7Ub')
+        dispatch({ type: PLAY_MUSIC, music });
+    };
+
     return (
         <div className="px-10 overflow-x-auto">
             <div className="flex flex-col gap-[40px] mb-10">
-                <SpotifyPlayer accessToken={localStorage.getItem('token')} />
                 <div>
+                    <button onClick={() => { playMusic() }}>Play</button>
                     <div className="flex justify-between mb-[19px]">
                         <h2 className="font-bold text-[20px]">Your favorite artists</h2>
                         <button className="flex font-light text-[15px] items-center"><p>View all</p><img src={arrow} alt='arrow' /></button>
