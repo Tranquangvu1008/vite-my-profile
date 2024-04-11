@@ -70,7 +70,7 @@ const reducer = (state: State, action: any) => {
         case SPOTIFY_PLAYER:
             return {
                 ...state,
-                playerSpotify: action.playerSpotify,
+                playerSpotify: action.player,
             };
         default:
             return state;

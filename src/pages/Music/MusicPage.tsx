@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect } from "react";
 import { SpotifyPage } from "./components/Spotify/SpotifyPage";
 import LoginPage from "./components/Login/LoginPage";
 import { useStateProvider } from "../../utils/StateProvider";
@@ -38,7 +38,7 @@ export const MusicPage = () => {
         }
     }, [dispatch, token]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const setupPlayer = () => {
             window.onSpotifyWebPlaybackSDKReady = () => {
                 const player = new window.Spotify.Player({
@@ -75,6 +75,7 @@ export const MusicPage = () => {
                     }
                 })
                 dispatch({ type: SPOTIFY_PLAYER, player });
+
                 //***Khi làm hàm logout thì xóa deviceId và xóa token
                 //***Khi unmount music thì phải pause nhạc trên thiết bị
             };

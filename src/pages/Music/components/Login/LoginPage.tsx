@@ -12,7 +12,14 @@ export default function LoginPage({ collapsed }: any) {
             "user-read-currently-playing",
             "user-read-recently-played",
             "user-top-read",
-            "streaming"
+            "app-remote-control",
+            "streaming",
+            "playlist-read-private",
+            "playlist-read-collaborative",
+            "playlist-modify-private",
+            "playlist-modify-public",
+            "user-follow-modify",
+            "user-follow-read",
         ];
         window.location.href = `${api_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope.join(
             " "

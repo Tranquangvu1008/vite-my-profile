@@ -21,7 +21,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
     const [volume, setVolume] = useState(0);
     const [isDrag, setIsDrag] = useState(false);
     const [allowUpdateFromAPI, setAllowUpdateFromAPI] = useState(true);
-    const [timeInterval] = useState(1000)
+    const [timeInterval] = useState(500)
 
     useEffect(() => {
         const interval = setInterval(async () => {
@@ -82,6 +82,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
     return (
         playbackState ?
             <div className="rounded-[20px] bg-transparent px-1 py-5 shadow-custom">
+                <button onClick={() => { localStorage.removeItem('token') }}
+                >das</button>
                 <div >
                     <img className="rounded-[10px] w-[70%] mx-auto" src={playbackState.item.album.images[0].url} alt="Album Cover" />
                 </div >
@@ -90,7 +92,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                     <div className="">{playbackState.item.artists.map((value: Artist2) => value.name).join(", ")}</div>
                 </div>
                 <div className='flex justify-center pb-4 px-2 gap-1 text-center items-center'>
-                    <p className='w-[60px]'>{formatTime(playbackState.progress_ms)}</p>
+                    <p className='w-[60px]'>{formatTime(playbackState.progress_ms) ?? '00:00'}</p>
                     <input
                         className='rounded-[2rem] leading-[0.5rem] w-full'
                         type="range"
