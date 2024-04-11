@@ -10,7 +10,6 @@ import { SET_CURRENT_PLAYING } from '../../../../../../../../utils/Constants';
 import { useEffect, useState } from 'react';
 import { Player } from '../../../../../../../../models/Music/Player';
 import { formatTime } from '../../../../../../../../helpers/helpers';
-import debounce from 'lodash.debounce';
 interface MusicPlayerProps {
     // playing?: CurrentPlay
 }
@@ -22,8 +21,26 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
     const [volume, setVolume] = useState(0);
     const [isDrag, setIsDrag] = useState(false);
     const [allowUpdateFromAPI, setAllowUpdateFromAPI] = useState(true);
-    const [timeInterval] = useState(500)
+    const [timeInterval] = useState(1000)
 
+    const getCurrenPlayer = async () => {
+        try {
+            const data = await getCurrentPlaying();
+            if (data) {
+                setPlaybackState(data);
+                dispatch({ type: SET_CURRENT_PLAYING, playing: data });
+                setTempPosition(data.progress_ms);
+                setVolume(data.device.volume_percent);
+                console.log('set', volume);
+            }
+        } catch (error) {
+            console.error('Lỗi khi lấy trạng thái phát nhạc:', error);
+        }
+        setIsDrag(false);
+        setTimeout(() => {
+            setAllowUpdateFromAPI(true)
+        }, 2000);
+    }
     useEffect(() => {
         const interval = setInterval(async () => {
             if (allowUpdateFromAPI) {
@@ -37,6 +54,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                             setVolume(data.device.volume_percent);
                         }
                     }
+                    console.log('use', volume);
                 } catch (error) {
                     console.error('Lỗi khi lấy trạng thái phát nhạc:', error);
                 }
@@ -44,39 +62,31 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
         }, timeInterval);
 
         return () => clearInterval(interval);
-    }, [dispatch, isDrag, allowUpdateFromAPI, timeInterval]);
+    }, [dispatch, isDrag, allowUpdateFromAPI, timeInterval, volume]);
 
     const handlePositionChange = (e: any) => {
         setIsDrag(true);
         setTempPosition(Number(e.target.value));
-        setTimeout(() => {
-            setAllowUpdateFromAPI(false);
-        }, 500);
+        setAllowUpdateFromAPI(false);
     };
 
-    const handleSeek = debounce(async () => {
+    const handleSeek = async () => {
         await setSeekToPosition(tempPosition);
-        setIsDrag(false);
-        setTimeout(() => {
-            setAllowUpdateFromAPI(true);
-        }, 500);
-    }, 500);
+        await new Promise(resolve => setTimeout(resolve, 500));
+        await getCurrenPlayer()
+    }
 
     const handleVolumeChange = (e: any) => {
         setIsDrag(true);
         setVolume(Number(e.target.value));
-        setTimeout(() => {
-            setAllowUpdateFromAPI(false);
-        }, 500)
+        setAllowUpdateFromAPI(false);
     };
 
-    const handleVolume = debounce(async () => {
+    const handleVolume = async () => {
         await setVolumePlayer(volume);
-        setIsDrag(false);
-        setTimeout(() => {
-            setAllowUpdateFromAPI(true);
-        }, 500);
-    }, 500);
+        await new Promise(resolve => setTimeout(resolve, 500));
+        await getCurrenPlayer()
+    }
 
     const startPlayer = async () => {
         await startPlayerSpotify();
@@ -152,3 +162,4 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
 }
 
 export default MusicPlayer;
+

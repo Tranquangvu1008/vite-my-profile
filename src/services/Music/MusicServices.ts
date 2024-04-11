@@ -35,7 +35,7 @@ export const getNewReleaseAlbum = async () => {
 export const getMyPlaylist = async () => {
     const { data } = await ApiService.get("/me/playlists", {
         params: {
-            limit: 5,
+            limit: 4,
             offset: 0
         }
     });
