@@ -31,7 +31,6 @@ export const Discover = () => {
         // const playing = await getCurrentPlaying();
         // dispatch({ type: SET_CURRENT_PLAYING, playing });
         // console.log(playing);
-
     };
 
     return (

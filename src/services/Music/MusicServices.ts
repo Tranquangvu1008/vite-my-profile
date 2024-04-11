@@ -77,3 +77,11 @@ export const setSeekToPosition = async (position: any) => {
 export const setVolumePlayer = async (volume: any) => {
     await ApiService.put(`/me/player/volume?volume_percent=${volume}&device_id=${localStorage.getItem('deviceId')}`);
 };
+
+export const startPlayerSpotify = async () => {
+    await ApiService.put(`/me/player/play?device_id=${localStorage.getItem('deviceId')}`);
+};
+
+export const pausePlayerSpotify = async () => {
+    await ApiService.put(`/me/player/pause?device_id=${localStorage.getItem('deviceId')}`);
+};

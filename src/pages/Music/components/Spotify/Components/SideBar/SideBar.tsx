@@ -13,7 +13,6 @@ export const SideBar = () => {
         }
     }, [myPlaylist]);
 
-
     return (
         <div className="flex-1 overflow-hidden">
             <div className="flex flex-col py-[3%] px-[30px] justify-between h-screen-minus-64 gap-5">

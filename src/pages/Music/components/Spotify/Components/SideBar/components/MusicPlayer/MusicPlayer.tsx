@@ -4,12 +4,13 @@ import { CgPlayTrackNext, CgPlayTrackPrev } from 'react-icons/cg';
 import { FiRepeat } from 'react-icons/fi';
 import { FaVolumeDown, FaVolumeUp } from 'react-icons/fa';
 import { Artist2 } from '../../../../../../../../models/Music/CurrentPlay';
-import { getCurrentPlaying, setSeekToPosition, setVolumePlayer } from '../../../../../../../../services/Music/MusicServices';
+import { getCurrentPlaying, pausePlayerSpotify, setSeekToPosition, setVolumePlayer, startPlayerSpotify } from '../../../../../../../../services/Music/MusicServices';
 import { useStateProvider } from '../../../../../../../../utils/StateProvider';
 import { SET_CURRENT_PLAYING } from '../../../../../../../../utils/Constants';
 import { useEffect, useState } from 'react';
 import { Player } from '../../../../../../../../models/Music/Player';
 import { formatTime } from '../../../../../../../../helpers/helpers';
+import debounce from 'lodash.debounce';
 interface MusicPlayerProps {
     // playing?: CurrentPlay
 }
@@ -48,30 +49,42 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
     const handlePositionChange = (e: any) => {
         setIsDrag(true);
         setTempPosition(Number(e.target.value));
-        setAllowUpdateFromAPI(false);
+        setTimeout(() => {
+            setAllowUpdateFromAPI(false);
+        }, 500);
     };
 
-    const handleSeek = async () => {
+    const handleSeek = debounce(async () => {
         await setSeekToPosition(tempPosition);
         setIsDrag(false);
         setTimeout(() => {
             setAllowUpdateFromAPI(true);
         }, 500);
-    };
+    }, 500);
 
-    const handleVolumeChange = (e: any) => { //onChange
+    const handleVolumeChange = (e: any) => {
         setIsDrag(true);
         setVolume(Number(e.target.value));
-        setAllowUpdateFromAPI(false);
+        setTimeout(() => {
+            setAllowUpdateFromAPI(false);
+        }, 500)
     };
 
-    const handleVolume = async () => {
+    const handleVolume = debounce(async () => {
         await setVolumePlayer(volume);
         setIsDrag(false);
         setTimeout(() => {
             setAllowUpdateFromAPI(true);
         }, 500);
-    };
+    }, 500);
+
+    const startPlayer = async () => {
+        await startPlayerSpotify();
+    }
+
+    const pausePlayer = async () => {
+        await pausePlayerSpotify();
+    }
 
     return (
         playbackState ?
@@ -106,9 +119,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                     </div>
                     <div className="text-[2rem]">
                         {playing.is_playing ? (
-                            <BsFillPauseCircleFill onClick={() => { }} />
+                            <BsFillPauseCircleFill onClick={() => { pausePlayer() }} />
                         ) : (
-                            <BsFillPlayCircleFill onClick={() => { }} />
+                            <BsFillPlayCircleFill onClick={() => { startPlayer() }} />
                         )}
                     </div>
                     <div className="text-[2rem]">
