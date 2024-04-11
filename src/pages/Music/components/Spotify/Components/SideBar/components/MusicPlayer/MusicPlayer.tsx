@@ -23,24 +23,6 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
     const [allowUpdateFromAPI, setAllowUpdateFromAPI] = useState(true);
     const [timeInterval] = useState(1000)
 
-    const getCurrenPlayer = async () => {
-        try {
-            const data = await getCurrentPlaying();
-            if (data) {
-                setPlaybackState(data);
-                dispatch({ type: SET_CURRENT_PLAYING, playing: data });
-                setTempPosition(data.progress_ms);
-                setVolume(data.device.volume_percent);
-                console.log('set', volume);
-            }
-        } catch (error) {
-            console.error('Lỗi khi lấy trạng thái phát nhạc:', error);
-        }
-        setIsDrag(false);
-        setTimeout(() => {
-            setAllowUpdateFromAPI(true)
-        }, 2000);
-    }
     useEffect(() => {
         const interval = setInterval(async () => {
             if (allowUpdateFromAPI) {
@@ -54,7 +36,6 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                             setVolume(data.device.volume_percent);
                         }
                     }
-                    console.log('use', volume);
                 } catch (error) {
                     console.error('Lỗi khi lấy trạng thái phát nhạc:', error);
                 }
@@ -62,7 +43,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
         }, timeInterval);
 
         return () => clearInterval(interval);
-    }, [dispatch, isDrag, allowUpdateFromAPI, timeInterval, volume]);
+    }, [dispatch, isDrag, allowUpdateFromAPI, timeInterval, volume, tempPosition]);
 
     const handlePositionChange = (e: any) => {
         setIsDrag(true);
@@ -73,7 +54,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
     const handleSeek = async () => {
         await setSeekToPosition(tempPosition);
         await new Promise(resolve => setTimeout(resolve, 500));
-        await getCurrenPlayer()
+        setIsDrag(false);
+        setAllowUpdateFromAPI(true)
     }
 
     const handleVolumeChange = (e: any) => {
@@ -85,7 +67,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
     const handleVolume = async () => {
         await setVolumePlayer(volume);
         await new Promise(resolve => setTimeout(resolve, 500));
-        await getCurrenPlayer()
+        setIsDrag(false);
+        setAllowUpdateFromAPI(true)
     }
 
     const startPlayer = async () => {
