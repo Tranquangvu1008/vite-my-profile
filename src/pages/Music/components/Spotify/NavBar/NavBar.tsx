@@ -1,22 +1,22 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useOutletContext } from "react-router-dom"
 import ExpandedIcon from "../../../../../assets/icons/expand.svg"
 import { useState } from "react";
+import { OutletContextType } from "../../../../../interface";
 
 export const NavBar = () => {
-    // State để kiểm soát việc hiển thị menu
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { collapsed } = useOutletContext<OutletContextType>();
 
-    // Hàm xử lý sự kiện click nút menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
     return (
-        <header className="header">
+        <header className={`${collapsed ? 'w-screen-minus-80' : 'w-screen-minus-200'} mx-auto hidden`}>
             <nav className="flex justify-center">
                 <div
-                    className='px-[57px] py-[38px]'
+                    className='px-[50px] py-[30px]'
                 >
-                    <ul className="flex gap-[49px] flex-row justify-center">
+                    <ul className="flex gap-[40px] flex-row justify-center">
                         <li className="nav__item">
                             <NavLink to="/music" className="nav__link">
                                 Discover
@@ -45,8 +45,8 @@ export const NavBar = () => {
                         </li>
                     </ul>
                 </div>
-                <input className="h-[31px] my-auto px-4 rounded-[35px] text-black" type="text" name="search" placeholder="Search" />
-                <div className="h-[31px] my-auto relative bg-red">
+                <input className="h-[30px] my-auto px-4 rounded-[35px] text-black max-w-[200px]" type="text" name="search" placeholder="Search" />
+                <div className="h-[30px] my-auto relative bg-red">
                     <button className="menu-button" onClick={toggleMenu}>
                         <img className="pl-[66px] mb-2" src={ExpandedIcon} alt="Expand menu" />
                     </button>

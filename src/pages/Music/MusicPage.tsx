@@ -53,9 +53,9 @@ export const MusicPage = () => {
                 player.addListener('playback_error', ({ message }: any) => { console.error(message); });
 
                 // Playback status updates
-                player.addListener('player_state_changed', (state: { paused: any; }) => {
-                    // setIsPlaying(!state.paused);
-                });
+                // player.addListener('player_state_changed', (state: { paused: any; }) => {
+                // setIsPlaying(!state.paused);
+                // });
 
                 // Ready
                 player.addListener('ready', ({ device_id }: any) => {
@@ -64,9 +64,9 @@ export const MusicPage = () => {
                 });
 
                 // Not Ready
-                player.addListener('not_ready', ({ device_id }: any) => {
-                    // console.log('Device ID has gone offline', device_id);
-                });
+                // player.addListener('not_ready', ({ device_id }: any) => {
+                // console.log('Device ID has gone offline', device_id);
+                // });
 
                 // Connect to the player!
                 player.connect().then((success: any) => {

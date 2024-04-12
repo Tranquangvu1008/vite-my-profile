@@ -1,28 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useStateProvider } from '../../../../utils/StateProvider';
 import { SET_CURRENT_PLAYING, SET_MY_PLAYLIST, SET_NEW_RELEASE_ALBUM, SET_PLAYER_STATE, SET_TOP_ARTISTS, SET_TOP_TRACKS, SET_USER } from '../../../../utils/Constants';
 import { getCurrentPlaying, getMyPlaylist, getNewReleaseAlbum, getPlayback, getTopItem, loginSpotify } from '../../../../services/Music/MusicServices';
 import { NavBar } from './NavBar/NavBar';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useOutletContext } from 'react-router-dom';
 import { Discover } from './Components/Discover/Discover';
 import { Latest } from './Components/Latest/Latest';
 import { SideBar } from './Components/SideBar/SideBar';
+import { MusicPlayerMobile } from './Components/SideBar/components/MusicPlayerMobile/MusicPlayerMobile';
+import { OutletContextType } from '../../../../interface';
 
 export const SpotifyPage = () => {
     const [{ token }, dispatch] = useStateProvider();
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const { collapsed } = useOutletContext<OutletContextType>();
+    // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-        };
+    // useEffect(() => {
+    //     const handleResize = () => {
+    //         setScreenWidth(window.innerWidth);
+    //     };
 
-        window.addEventListener('resize', handleResize);
+    //     window.addEventListener('resize', handleResize);
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize);
+    //     };
+    // }, []);
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -65,13 +68,13 @@ export const SpotifyPage = () => {
     }, [dispatch, token])
 
     useEffect(() => {
-        const limit = screenWidth > 1600 ? 4 : 3;
+        const limit = 3
         const getMyPlaylistSpotify = async () => {
             const myPlaylist = await getMyPlaylist(limit)
             dispatch({ type: SET_MY_PLAYLIST, myPlaylist });
         };
         getMyPlaylistSpotify();
-    }, [dispatch, screenWidth, token])
+    }, [dispatch, token])
 
     useEffect(() => {
         const getCurrentPlayingSpotify = async () => {
@@ -83,19 +86,19 @@ export const SpotifyPage = () => {
 
     return (
         <div className='flex flex-col h-screen-minus-64'>
-            <div className='flex flex-1 overflow-hidden'>
+            <div className='flex flex-1 sm:flex-row flex-col sm:overflow-hidden'>
                 {/* Phần có thể scroll */}
-                <div className='flex-[3] overflow-auto'>
+                <div className={`sm:flex-[3] overflow-auto sm:pb-[70px] ${collapsed ? 'md:static relative ' : 'lg:static relative'}`}>
                     <NavBar />
                     <Routes>
                         <Route index element={<Discover />} />
                         <Route path='latest' element={<Latest />} />
                     </Routes>
                 </div>
+                <div className={`${collapsed ? 'md:hidden w-screen-minus-80' : 'lg:hidden w-screen-minus-200 mobile:block hidden'} fixed bottom-0 z-[1000]`}><MusicPlayerMobile /></div>
                 {/* Phần không scroll */}
                 <SideBar />
             </div>
         </div>
-
     )
 }

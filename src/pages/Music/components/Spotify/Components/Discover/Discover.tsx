@@ -12,7 +12,7 @@ import { playMusicSpotify } from '../../../../../../services/Music/MusicServices
 import { FavoriteTrack } from './Components/FavoriteTrack';
 
 export const Discover = () => {
-    const [{ topArtist, topTracks, newReleaseAlbum }, dispatch] = useStateProvider();
+    const [{ topArtist, topTracks, newReleaseAlbum }] = useStateProvider();
     const [favArtist, setFavArtist] = useState<Artist[]>([])
     const [favTracks, setFavTracks] = useState<Track[]>([])
     const [newAlbum, setNewAlbum] = useState<Album[]>([])
@@ -27,15 +27,11 @@ export const Discover = () => {
 
     const playMusic = async (type: string, uri: any) => {
         await playMusicSpotify(type, uri);
-        // await new Promise(resolve => setTimeout(resolve, 500));
-        // const playing = await getCurrentPlaying();
-        // dispatch({ type: SET_CURRENT_PLAYING, playing });
-        // console.log(playing);
     };
 
     return (
-        <div className="px-10 overflow-x-auto">
-            <div className="flex flex-col gap-[40px] mb-10">
+        <div className="sm:pt-10 sm:pb-2 px-2 overflow-x-auto">
+            <div className="flex flex-col gap-[20px]">
                 <div>
                     {/* <button onClick={() => localStorage.removeItem('token')}>clear</button> */}
                     <div className="flex justify-between mb-[19px]">
