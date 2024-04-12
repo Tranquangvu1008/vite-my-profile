@@ -1,15 +1,15 @@
 import './MusicPlayer.scss';
 import { BsFillPauseCircleFill, BsFillPlayCircleFill, BsShuffle } from 'react-icons/bs';
 import { CgPlayTrackNext, CgPlayTrackPrev } from 'react-icons/cg';
-import { FiRepeat } from 'react-icons/fi';
 import { FaVolumeDown, FaVolumeUp } from 'react-icons/fa';
 import { Artist2 } from '../../../../../../../../models/Music/CurrentPlay';
-import { getCurrentPlaying, pausePlayerSpotify, setSeekToPosition, setVolumePlayer, startPlayerSpotify } from '../../../../../../../../services/Music/MusicServices';
+import { getCurrentPlaying, nextPlayerSpotify, pausePlayerSpotify, previousPlayerSpotify, repeatPlayerSpotify, setSeekToPosition, setVolumePlayer, shufflePlayerSpotify, startPlayerSpotify } from '../../../../../../../../services/Music/MusicServices';
 import { useStateProvider } from '../../../../../../../../utils/StateProvider';
 import { SET_CURRENT_PLAYING } from '../../../../../../../../utils/Constants';
 import { useEffect, useState } from 'react';
 import { Player } from '../../../../../../../../models/Music/Player';
 import { formatTime } from '../../../../../../../../helpers/helpers';
+import { TbRepeat, TbRepeatOnce } from 'react-icons/tb';
 interface MusicPlayerProps {
     // playing?: CurrentPlay
 }
@@ -45,6 +45,13 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
         return () => clearInterval(interval);
     }, [dispatch, isDrag, allowUpdateFromAPI, timeInterval, volume, tempPosition]);
 
+    useEffect(() => {
+
+        console.log(playbackState);
+
+    }, [playbackState])
+
+
     const handlePositionChange = (e: any) => {
         setIsDrag(true);
         setTempPosition(Number(e.target.value));
@@ -79,11 +86,26 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
         await pausePlayerSpotify();
     }
 
+    const nextPlayer = async () => {
+        await nextPlayerSpotify();
+    }
+
+    const previousPlayer = async () => {
+        await previousPlayerSpotify();
+    }
+
+    const repeatPlayer = async (state: string) => {
+        await repeatPlayerSpotify(state);
+    }
+
+    const shufflePlayer = async (state: boolean) => {
+        await shufflePlayerSpotify(state);
+    }
+
+
     return (
         playbackState ?
             <div className="rounded-[20px] bg-transparent px-1 py-5 shadow-custom">
-                <button onClick={() => { localStorage.removeItem('token') }}
-                >das</button>
                 <div >
                     <img className="rounded-[10px] w-[70%] mx-auto" src={playbackState.item.album.images[0].url} alt="Album Cover" />
                 </div >
@@ -107,10 +129,10 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                 </div>
                 <div className='flex items-center justify-center gap-8'>
                     <div className="shuffle">
-                        <BsShuffle />
+                        <BsShuffle className={`${playbackState.shuffle_state && 'text-[#0075FF]'}`} onClick={() => { shufflePlayer(!playbackState.shuffle_state) }} />
                     </div>
                     <div className="text-[2rem]">
-                        <CgPlayTrackPrev onClick={() => { }} />
+                        <CgPlayTrackPrev onClick={() => { previousPlayer() }} />
                     </div>
                     <div className="text-[2rem]">
                         {playing.is_playing ? (
@@ -120,10 +142,16 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                         )}
                     </div>
                     <div className="text-[2rem]">
-                        <CgPlayTrackNext onClick={() => { }} />
+                        <CgPlayTrackNext onClick={() => { nextPlayer() }} />
                     </div>
                     <div className="repeat">
-                        <FiRepeat />
+                        {playbackState.repeat_state === 'off'
+                            ? <TbRepeat onClick={() => { repeatPlayer('context') }} />
+                            : playbackState.repeat_state === 'track'
+                                ? <TbRepeatOnce className='text-[#0075FF]' onClick={() => { repeatPlayer('off') }} />
+                                : <TbRepeat className='text-[#0075FF]' onClick={() => { repeatPlayer('track') }} />
+                        }
+
                     </div>
                 </div>
                 <div className='flex justify-end pt-4 pr-2 gap-1 items-center text'>

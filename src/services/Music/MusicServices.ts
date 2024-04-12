@@ -85,3 +85,19 @@ export const startPlayerSpotify = async () => {
 export const pausePlayerSpotify = async () => {
     await ApiService.put(`/me/player/pause?device_id=${localStorage.getItem('deviceId')}`);
 };
+
+export const nextPlayerSpotify = async () => {
+    await ApiService.post(`/me/player/next?device_id=${localStorage.getItem('deviceId')}`);
+};
+
+export const previousPlayerSpotify = async () => {
+    await ApiService.post(`/me/player/previous?device_id=${localStorage.getItem('deviceId')}`);
+};
+
+export const repeatPlayerSpotify = async (state: string) => {
+    await ApiService.put(`/me/player/repeat?state=${state}&device_id=${localStorage.getItem('deviceId')}`);
+};
+
+export const shufflePlayerSpotify = async (state: boolean) => {
+    await ApiService.put(`/me/player/shuffle?state=${state}&device_id=${localStorage.getItem('deviceId')}`);
+};
