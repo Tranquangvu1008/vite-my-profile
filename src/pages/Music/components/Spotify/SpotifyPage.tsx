@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStateProvider } from '../../../../utils/StateProvider';
 import { SET_CURRENT_PLAYING, SET_MY_PLAYLIST, SET_NEW_RELEASE_ALBUM, SET_PLAYER_STATE, SET_TOP_ARTISTS, SET_TOP_TRACKS, SET_USER } from '../../../../utils/Constants';
 import { getCurrentPlaying, getMyPlaylist, getNewReleaseAlbum, getPlayback, getTopItem, loginSpotify } from '../../../../services/Music/MusicServices';
@@ -10,6 +10,19 @@ import { SideBar } from './Components/SideBar/SideBar';
 
 export const SpotifyPage = () => {
     const [{ token }, dispatch] = useStateProvider();
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -52,12 +65,13 @@ export const SpotifyPage = () => {
     }, [dispatch, token])
 
     useEffect(() => {
+        const limit = screenWidth > 1600 ? 4 : 3;
         const getMyPlaylistSpotify = async () => {
-            const myPlaylist = await getMyPlaylist()
+            const myPlaylist = await getMyPlaylist(limit)
             dispatch({ type: SET_MY_PLAYLIST, myPlaylist });
         };
         getMyPlaylistSpotify();
-    }, [dispatch, token])
+    }, [dispatch, screenWidth, token])
 
     useEffect(() => {
         const getCurrentPlayingSpotify = async () => {

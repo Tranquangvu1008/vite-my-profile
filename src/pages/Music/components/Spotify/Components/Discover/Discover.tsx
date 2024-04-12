@@ -45,11 +45,14 @@ export const Discover = () => {
                     <div className='mx-auto max-w-screen-xl'>
                         <Swiper
                             breakpoints={{
+                                1280: {
+                                    slidesPerView: 8, //**Có collapsed thì giảm còn 6
+                                },
                                 1024: {
-                                    slidesPerView: 8,
+                                    slidesPerView: 6, //**Có collapsed thì giảm còn 4
                                 },
                                 0: {
-                                    slidesPerView: 4,
+                                    slidesPerView: 4, //**Có collapsed thì giảm còn 2
                                 }
                             }}
                         >

@@ -1,5 +1,3 @@
-import { CurrentPlay } from "../../models/Music/CurrentPlay";
-import { Player } from "../../models/Music/Player";
 import ApiService from "../index";
 
 export const loginSpotify = async () => {
@@ -32,10 +30,10 @@ export const getNewReleaseAlbum = async () => {
     return data.albums;
 };
 
-export const getMyPlaylist = async () => {
+export const getMyPlaylist = async (limit: number) => {
     const { data } = await ApiService.get("/me/playlists", {
         params: {
-            limit: 4,
+            limit: limit,
             offset: 0
         }
     });

@@ -114,9 +114,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                     <div className="">{playbackState.item.artists.map((value: Artist2) => value.name).join(", ")}</div>
                 </div>
                 <div className='flex justify-center pb-4 px-2 gap-1 text-center items-center'>
-                    <p className='w-[60px]'>{formatTime(playbackState.progress_ms) ?? '00:00'}</p>
+                    <p className='lg:w-[60px] w-[40px] lg:text-sm text-xs'>{formatTime(playbackState.progress_ms) ?? '00:00'}</p>
                     <input
-                        className='rounded-[2rem] leading-[0.5rem] w-full'
+                        className='rounded-[2rem] leading-[0.5rem] w-full lg:h-4 h-2'
                         type="range"
                         value={tempPosition}
                         min={0}
@@ -125,26 +125,26 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                         onMouseUp={handleSeek}
                         onTouchEnd={handleSeek}
                     />
-                    <p className='w-[60px]'>{formatTime(playbackState.item.duration_ms)}</p>
+                    <p className='lg:w-[60px] w-[40px] lg:text-sm text-xs'>{formatTime(playbackState.item.duration_ms)}</p>
                 </div>
-                <div className='flex items-center justify-center gap-8'>
+                <div className='flex items-center justify-center xl:gap-6 lg:gap-4 gap-2'>
                     <div className="shuffle">
                         <BsShuffle className={`${playbackState.shuffle_state && 'text-[#0075FF]'}`} onClick={() => { shufflePlayer(!playbackState.shuffle_state) }} />
                     </div>
-                    <div className="text-[2rem]">
+                    <div className="xl:text-[2rem] lg:text-[1.7rem] text-[1.5rem]">
                         <CgPlayTrackPrev onClick={() => { previousPlayer() }} />
                     </div>
-                    <div className="text-[2rem]">
+                    <div className="xl:text-[2rem] lg:text-[1.7rem] text-[1.5rem]">
                         {playing.is_playing ? (
                             <BsFillPauseCircleFill onClick={() => { pausePlayer() }} />
                         ) : (
                             <BsFillPlayCircleFill onClick={() => { startPlayer() }} />
                         )}
                     </div>
-                    <div className="text-[2rem]">
+                    <div className="xl:text-[2rem] lg:text-[1.7rem] text-[1.5rem]">
                         <CgPlayTrackNext onClick={() => { nextPlayer() }} />
                     </div>
-                    <div className="repeat">
+                    <div className="text-[1rem]">
                         {playbackState.repeat_state === 'off'
                             ? <TbRepeat onClick={() => { repeatPlayer('context') }} />
                             : playbackState.repeat_state === 'track'
@@ -157,7 +157,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                 <div className='flex justify-end pt-4 pr-2 gap-1 items-center text'>
                     <FaVolumeDown />
                     <input
-                        className='rounded-[2rem] leading-[0.5rem]'
+                        className='rounded-[2rem] leading-[0.5rem] w-full lg:h-4 h-2'
                         type="range"
                         min={0}
                         max={100}
