@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import errorImg from '/src/assets/images/404.png'
 
 export const ErrorPage = () => {
     return (
@@ -6,7 +7,7 @@ export const ErrorPage = () => {
             <section className="flex flex-col items-center justify-center h-screen">
                 <div className="px-10">
                     <div className="">
-                        <figure className=""><img className="mx-auto mb-10" src="/src/assets/images/404.png" alt="" /></figure>
+                        <figure className=""><img className="mx-auto mb-10" src={errorImg} alt="" /></figure>
                     </div>
                     <div className="text-center">
                         <h1 className="mb-[1rem] leading-[1.3] font-bold text-[#343f52] tracking-[-0.01rem] text-[2rem] ">Oops! Page Not Found.</h1>
