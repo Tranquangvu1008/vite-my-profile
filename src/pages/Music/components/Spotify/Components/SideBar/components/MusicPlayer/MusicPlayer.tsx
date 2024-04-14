@@ -1,7 +1,6 @@
 import './MusicPlayer.scss';
 import { BsFillPauseCircleFill, BsFillPlayCircleFill, BsShuffle } from 'react-icons/bs';
 import { CgPlayTrackNext, CgPlayTrackPrev } from 'react-icons/cg';
-import { FaVolumeDown, FaVolumeUp } from 'react-icons/fa';
 import { Artist2 } from '../../../../../../models/Music/CurrentPlay';
 import { formatTime } from '../../../../../../../../helpers/helpers';
 import { TbRepeat, TbRepeatOnce } from 'react-icons/tb';
