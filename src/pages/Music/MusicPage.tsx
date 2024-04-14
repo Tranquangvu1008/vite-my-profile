@@ -7,7 +7,7 @@ import { SpotifyPage } from "./components/Spotify";
 const MusicPage = () => {
     const { collapsed } = useOutletContext<OutletContextType>();
     const { token } = useToken();
-
+    document.title = "Spotify"
     return (
         <div>
             {token ? <SpotifyPage /> : <LoginPage collapsed={collapsed} />}

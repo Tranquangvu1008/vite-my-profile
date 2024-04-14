@@ -57,7 +57,7 @@ export const useConnectSpotify = () => {
         });
 
         await spotifyPlayer.connect();
-        dispatch({ type: SPOTIFY_PLAYER, spotifyPlayer });
+        dispatch({ type: SPOTIFY_PLAYER, player: spotifyPlayer });
         setInitialized(true);
     }, [dispatch, token]);
 

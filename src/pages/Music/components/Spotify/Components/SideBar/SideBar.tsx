@@ -19,7 +19,7 @@ export const SideBar = () => {
     }, [myPlaylist]);
 
     return (
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden sm:pb-0 pb-[70px]">
             <div className="flex flex-col sm:py-5 py-2 sm:px-5 px-2 justify-between sm:h-screen-minus-64 gap-5">
                 <div>
                     <h4 className="font-semibold text-[20px]">Library</h4>

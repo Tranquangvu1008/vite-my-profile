@@ -14,7 +14,7 @@ const SpotifyPage = () => {
     useConnectSpotify();
 
     return (
-        <div className='flex flex-col h-screen-minus-64'>
+        <div className='flex flex-col sm:h-screen-minus-64 h-screen'>
             <div className='flex flex-1 sm:flex-row flex-col sm:overflow-hidden'>
                 {/* Phần có thể scroll */}
                 <div className={`sm:flex-[3] overflow-auto sm:pb-[70px] ${collapsed ? 'md:static relative ' : 'lg:static relative'}`}>
