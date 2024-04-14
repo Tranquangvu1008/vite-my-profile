@@ -1,94 +1,17 @@
-import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { HeaderSection } from "./components/HeaderSection";
 import { FormSection } from "./components/FormSection";
 import { TableSection } from "./components/TableSection";
 import { PaginationSection } from "./components/PaginationSection";
-
-interface IFormInput {
-    id: number;
-    fullName: string
-    email: string
-    address: string
-    city: string
-    country: string
-}
+import { usePaging } from "./hooks/usePaging";
+import { useHandleForm } from "./hooks/useHandleForm";
 
 const headers = Array.of("FULL NAME", "EMAIL ADDRESS", "ADDRESS", "COUNTRY", "ACTION");
 
-export const ReactHookForm = () => {
-    const [listUserInfo, setListUserInfo] = useState<IFormInput[]>([]);
-    const [modeEdit, setModeEdit] = useState(false)
-    const formOptions = { defaultValues: { fullName: '', email: '', address: '', city: '' } };
-
-    //Paging
-    const [currentPage, setCurrentPage] = useState(1);
-    const [recordsPerPage] = useState(10);
-    const [indexOfLastRecord, setIndexOfLastRecord] = useState(currentPage * recordsPerPage);
-    const [indexOfFirstRecord, setIndexOfFirstRecord] = useState(indexOfLastRecord - recordsPerPage);
-    const [currentRecords, setCurrentRecords] = useState(listUserInfo.slice(indexOfFirstRecord, indexOfLastRecord))
-
-    const goToNextPage = () => {
-        const nPages = Math.ceil(listUserInfo.length / recordsPerPage)
-        if (currentPage !== nPages) {
-            setCurrentPage(currentPage + 1)
-        }
-    }
-    const goToPrevPage = () => {
-        if (currentPage !== 1) setCurrentPage(currentPage - 1)
-    }
-
-    useEffect(() => {
-        setIndexOfLastRecord(currentPage * recordsPerPage)
-        setIndexOfFirstRecord(indexOfLastRecord - recordsPerPage)
-        setCurrentRecords(listUserInfo.slice(indexOfFirstRecord, indexOfLastRecord))
-    }, [currentPage, indexOfFirstRecord, indexOfLastRecord, listUserInfo, recordsPerPage])
-
+const ReactHookForm = () => {
     //Handle form
-    const {
-        register,
-        setValue,
-        handleSubmit,
-        reset,
-        formState: { errors }
-    } = useForm<IFormInput>(formOptions);
-    const onSubmit: SubmitHandler<IFormInput> = (data: any) => {
-        if (data) {
-            if (modeEdit && data.id) {
-                const newUpdate = listUserInfo.map((item) => {
-                    if (item.id === data.id) {
-                        return { ...data }
-                    }
-                    return item;
-                })
-                setListUserInfo(newUpdate);
-                setModeEdit(false)
-                reset()
-            } else {
-                const newId = listUserInfo.reduce((maxId, item) => Math.max(item.id, maxId), 0) + 1;
-                setListUserInfo([...listUserInfo, { id: newId, ...data }])
-                reset()
-            }
-        }
-    }
-
-    const deleteItem = (id: number) => {
-        const newList = listUserInfo.filter((item) => item.id !== id);
-        setListUserInfo(newList)
-    }
-
-    const showItemUpdate = (id: number) => {
-        const itemUpdate: IFormInput = listUserInfo.filter((item) => item.id === id)[0];
-        if (itemUpdate) {
-            setModeEdit(true);
-            setValue("id", itemUpdate.id)
-            setValue("fullName", itemUpdate.fullName);
-            setValue("email", itemUpdate.email);
-            setValue("address", itemUpdate.address);
-            setValue("city", itemUpdate.city);
-            setValue("country", itemUpdate.country);
-        }
-    }
+    const { register, errors, modeEdit, handleSubmit, onSubmit, deleteItem, showItemUpdate, listUserInfo } = useHandleForm();
+    //Paging
+    const { currentRecords, goToNextPage, goToPrevPage, currentPage, recordsPerPage } = usePaging(listUserInfo);
 
     return (
         <div className='h-screen'>
@@ -123,3 +46,5 @@ export const ReactHookForm = () => {
         </div>
     )
 }
+
+export default ReactHookForm;

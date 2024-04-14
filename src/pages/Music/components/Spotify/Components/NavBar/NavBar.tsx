@@ -1,7 +1,7 @@
 import { NavLink, useOutletContext } from "react-router-dom"
-import ExpandedIcon from "../../../../../assets/icons/expand.svg"
+import ExpandedIcon from "../../../../../../assets/icons/expand.svg"
 import { useState } from "react";
-import { OutletContextType } from "../../../../../interface";
+import { OutletContextType } from "../../../../../../interface";
 
 export const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

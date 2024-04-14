@@ -2,103 +2,18 @@ import './MusicPlayer.scss';
 import { BsFillPauseCircleFill, BsFillPlayCircleFill, BsShuffle } from 'react-icons/bs';
 import { CgPlayTrackNext, CgPlayTrackPrev } from 'react-icons/cg';
 import { FaVolumeDown, FaVolumeUp } from 'react-icons/fa';
-import { Artist2 } from '../../../../../../../../models/Music/CurrentPlay';
-import { getCurrentPlaying, nextPlayerSpotify, pausePlayerSpotify, previousPlayerSpotify, repeatPlayerSpotify, setSeekToPosition, setVolumePlayer, shufflePlayerSpotify, startPlayerSpotify } from '../../../../../../../../services/Music/MusicServices';
-import { useStateProvider } from '../../../../../../../../utils/StateProvider';
-import { SET_CURRENT_PLAYING } from '../../../../../../../../utils/Constants';
-import { useEffect, useState } from 'react';
-import { Player } from '../../../../../../../../models/Music/Player';
+import { Artist2 } from '../../../../../../models/Music/CurrentPlay';
 import { formatTime } from '../../../../../../../../helpers/helpers';
 import { TbRepeat, TbRepeatOnce } from 'react-icons/tb';
 import { useOutletContext } from 'react-router-dom';
 import { OutletContextType } from '../../../../../../../../interface';
-interface MusicPlayerProps {
-    // playing?: CurrentPlay
-}
+import { useControlPlayer } from '../../hooks/useControlPlayer';
+import { Volume } from './components/Volume';
 
-export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
+export const MusicPlayer = () => {
     const { collapsed } = useOutletContext<OutletContextType>();
-
-    const [{ playing }, dispatch] = useStateProvider();
-    const [playbackState, setPlaybackState] = useState<Player>();
-    const [tempPosition, setTempPosition] = useState(0);
-    const [volume, setVolume] = useState(0);
-    const [isDrag, setIsDrag] = useState(false);
-    const [allowUpdateFromAPI, setAllowUpdateFromAPI] = useState(true);
-    const [timeInterval] = useState(500)
-
-    useEffect(() => {
-        const interval = setInterval(async () => {
-            if (allowUpdateFromAPI) {
-                try {
-                    const data = await getCurrentPlaying();
-                    if (data) {
-                        setPlaybackState(data);
-                        dispatch({ type: SET_CURRENT_PLAYING, playing: data });
-                        if (!isDrag) {
-                            setTempPosition(data.progress_ms);
-                            setVolume(data.device.volume_percent);
-                        }
-                    }
-                } catch (error) {
-                    console.error('Lỗi khi lấy trạng thái phát nhạc:', error);
-                }
-            }
-        }, timeInterval);
-
-        return () => clearInterval(interval);
-    }, [dispatch, isDrag, allowUpdateFromAPI, timeInterval, volume, tempPosition]);
-
-    const handlePositionChange = (e: any) => {
-        setIsDrag(true);
-        setTempPosition(Number(e.target.value));
-        setAllowUpdateFromAPI(false);
-    };
-
-    const handleSeek = async () => {
-        await setSeekToPosition(tempPosition);
-        await new Promise(resolve => setTimeout(resolve, 500));
-        setIsDrag(false);
-        setAllowUpdateFromAPI(true)
-    }
-
-    const handleVolumeChange = (e: any) => {
-        setIsDrag(true);
-        setVolume(Number(e.target.value));
-        setAllowUpdateFromAPI(false);
-    };
-
-    const handleVolume = async () => {
-        await setVolumePlayer(volume);
-        await new Promise(resolve => setTimeout(resolve, 500));
-        setIsDrag(false);
-        setAllowUpdateFromAPI(true)
-    }
-
-    const startPlayer = async () => {
-        await startPlayerSpotify();
-    }
-
-    const pausePlayer = async () => {
-        await pausePlayerSpotify();
-    }
-
-    const nextPlayer = async () => {
-        await nextPlayerSpotify();
-    }
-
-    const previousPlayer = async () => {
-        await previousPlayerSpotify();
-    }
-
-    const repeatPlayer = async (state: string) => {
-        await repeatPlayerSpotify(state);
-    }
-
-    const shufflePlayer = async (state: boolean) => {
-        await shufflePlayerSpotify(state);
-    }
-
+    const { playbackState, handlePositionChange, handleSeek, handleVolumeChange, handleVolume, startPlayer,
+        pausePlayer, nextPlayer, previousPlayer, repeatPlayer, shufflePlayer, playing, tempPosition, volume } = useControlPlayer();
 
     return (
         playbackState ?
@@ -113,7 +28,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                 <div className='flex lg:flex-row flex-col justify-center pb-4 px-2 gap-1 text-center items-center'>
                     <p className='lg:block hidden lg:w-[60px] w-[40px] lg:text-sm text-xs'>{formatTime(playbackState.progress_ms) ?? '00:00'}</p>
                     <input
-                        className='rounded-[2rem] leading-[0.5rem] w-full lg:h-4 h-2'
+                        className='rounded-[2rem] leading-[0.5rem] w-full lg:h-4 h-2 cursor-pointer'
                         type="range"
                         value={tempPosition}
                         min={0}
@@ -130,45 +45,32 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = () => {
                 </div>
                 <div className={`flex items-center justify-center  ${collapsed ? 'xl:gap-6 lg:gap-4 gap-2' : 'xl:gap-4 lg:gap-2 gap-1'}`}>
                     <div className="lg:text-[1rem] text-[0.7rem]">
-                        <BsShuffle className={`${playbackState.shuffle_state && 'text-[#0075FF]'}`} onClick={() => { shufflePlayer(!playbackState.shuffle_state) }} />
+                        <BsShuffle className={`cursor-pointer ${playbackState.shuffle_state && 'text-[#0075FF]'}`} onClick={() => { shufflePlayer(!playbackState.shuffle_state) }} />
                     </div>
                     <div className="xl:text-[2rem] lg:text-[1.5rem] text-[1.2rem]">
-                        <CgPlayTrackPrev onClick={() => { previousPlayer() }} />
+                        <CgPlayTrackPrev className='cursor-pointer' onClick={() => { previousPlayer() }} />
                     </div>
                     <div className="xl:text-[2rem] lg:text-[1.5rem] text-[1.2rem]">
                         {playing.is_playing ? (
-                            <BsFillPauseCircleFill onClick={() => { pausePlayer() }} />
+                            <BsFillPauseCircleFill className='cursor-pointer' onClick={() => { pausePlayer() }} />
                         ) : (
-                            <BsFillPlayCircleFill onClick={() => { startPlayer() }} />
+                            <BsFillPlayCircleFill className='cursor-pointer' onClick={() => { startPlayer() }} />
                         )}
                     </div>
                     <div className="xl:text-[2rem] lg:text-[1.5rem] text-[1.2rem]">
-                        <CgPlayTrackNext onClick={() => { nextPlayer() }} />
+                        <CgPlayTrackNext className='cursor-pointer' onClick={() => { nextPlayer() }} />
                     </div>
                     <div className="lg:text-[1rem] text-[0.7rem]">
                         {playbackState.repeat_state === 'off'
-                            ? <TbRepeat onClick={() => { repeatPlayer('context') }} />
+                            ? <TbRepeat className='cursor-pointer' onClick={() => { repeatPlayer('context') }} />
                             : playbackState.repeat_state === 'track'
-                                ? <TbRepeatOnce className='text-[#0075FF]' onClick={() => { repeatPlayer('off') }} />
-                                : <TbRepeat className='text-[#0075FF]' onClick={() => { repeatPlayer('track') }} />
+                                ? <TbRepeatOnce className='cursor-pointer text-[#0075FF]' onClick={() => { repeatPlayer('off') }} />
+                                : <TbRepeat className='cursor-pointer text-[#0075FF]' onClick={() => { repeatPlayer('track') }} />
                         }
 
                     </div>
                 </div>
-                <div className='flex justify-end pt-4 pr-2 gap-1 items-center text'>
-                    <FaVolumeDown />
-                    <input
-                        className='rounded-[2rem] leading-[0.5rem] w-[50%] lg:h-4 h-2'
-                        type="range"
-                        min={0}
-                        max={100}
-                        value={volume}
-                        onChange={handleVolumeChange}
-                        onMouseUp={handleVolume}
-                        onTouchEnd={handleVolume}
-                    />
-                    <FaVolumeUp />
-                </div>
+                <Volume volume={volume} handleVolume={handleVolume} handleVolumeChange={handleVolumeChange} />
             </div >
             : null
 

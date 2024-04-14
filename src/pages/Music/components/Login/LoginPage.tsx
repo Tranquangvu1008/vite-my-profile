@@ -2,8 +2,8 @@
 export default function LoginPage({ collapsed }: any) {
     const handleClick = async () => {
         const client_id = "7600e7b6d594423fa6d00a48a7dadb5b";
-        // const redirect_uri = "http://localhost:5173/music";
-        const redirect_uri = "https://devu.blog/music";
+        const redirect_uri = "http://localhost:5173/music";
+        // const redirect_uri = "https://devu.blog/music";
         const api_uri = "https://accounts.spotify.com/authorize";
         const scope = [
             "user-read-private",

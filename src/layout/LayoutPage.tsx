@@ -4,7 +4,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import { Logo } from '../components/SideBar/Logo';
 import { ToggleThemeButton } from '../components/SideBar/ToggleThemeButton';
 import { MenuList } from '../components/SideBar/MenuList';
-import { useConfigView } from '../hooks/useConfigView';
+import { useConfigView } from '../pages/Music/hooks/useConfigView';
 
 const { Header, Sider } = Layout
 
