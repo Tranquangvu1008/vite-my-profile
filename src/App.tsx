@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.scss'
-import LayoutPage from './pages/Layout/LayoutPage'
-import { HomePage } from './pages/Home/HomePage'
 import { QuestionBoard } from './pages/Task/QuestionBoard/QuestionBoard'
 import { ErrorPage } from './pages/ErrorPage/ErrorPage'
 import { ContactPage } from './pages/Contact/ContactPage'
 import { MusicPage } from './pages/Music/MusicPage'
 import { ReactHookForm } from './pages/Task/ReactHookForm/ReactHookForm'
+import LayoutPage from './layout/LayoutPage'
+import { HomePage } from './pages/Home'
 
 export const App = () => {
   return (

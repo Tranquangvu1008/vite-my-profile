@@ -8,7 +8,7 @@ import { WorkExperience } from "./components/WorkExperience/WorkExperience";
 import { Languages } from "./components/Languages/Languages";
 import { ContactMe } from "./components/ContactMe/ContactMe";
 
-export const HomePage = () => {
+const HomePage = () => {
   const { collapsed } = useOutletContext<OutletContextType>();
 
   return (
@@ -33,3 +33,5 @@ export const HomePage = () => {
     </div>
   )
 }
+
+export default HomePage;

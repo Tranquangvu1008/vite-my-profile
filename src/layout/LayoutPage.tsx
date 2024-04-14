@@ -1,32 +1,15 @@
-import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
-import { Logo } from '../../components/SideBar/Logo'
-import { MenuList } from '../../components/SideBar/MenuList'
-import { ToggleThemeButton } from '../../components/SideBar/ToggleThemeButton'
+import { Logo } from '../components/SideBar/Logo';
+import { ToggleThemeButton } from '../components/SideBar/ToggleThemeButton';
+import { MenuList } from '../components/SideBar/MenuList';
+import { useConfigView } from '../hooks/useConfigView';
 
 const { Header, Sider } = Layout
 
 function LayoutPage() {
-  const [darkTheme, setDarkTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' ? true : false : true)
-  const [collapsed, setCollapsed] = useState(localStorage.getItem('collapse') ? localStorage.getItem('collapse') === 'collapsed' ? true : false : true)
-
-  useEffect(() => {
-    localStorage.setItem('theme', darkTheme === true ? 'dark' : 'light');
-  }, [darkTheme])
-
-  useEffect(() => {
-    localStorage.setItem('collapse', collapsed === true ? 'collapsed' : 'uncollapsed');
-  }, [collapsed])
-
-  const toggleTheme = () => {
-    setDarkTheme(!darkTheme)
-  }
-
-  const collapsedMenu = () => {
-    setCollapsed(!collapsed)
-  }
+  const { darkTheme, collapsed, toggleTheme, collapsedMenu } = useConfigView();
 
   return (
     <Layout>
@@ -56,3 +39,4 @@ function LayoutPage() {
 }
 
 export default LayoutPage
+
