@@ -7,20 +7,14 @@ import { Skills } from "./components/Skills/Skills";
 import { WorkExperience } from "./components/WorkExperience/WorkExperience";
 import { Languages } from "./components/Languages/Languages";
 import { ContactMe } from "./components/ContactMe/ContactMe";
+import { Metadata } from "../../components/Metadata/Metadata";
 
 const HomePage = () => {
   const { collapsed } = useOutletContext<OutletContextType>();
 
   return (
     <div className='flex flex-col'>
-      <HelmetProvider>
-        <div>
-          <Helmet>
-            <title>Home Page</title>
-            <meta name="description" content="Home page for introducing the owner of Devu.blog's website" />
-          </Helmet>
-        </div>
-      </HelmetProvider >
+      <Metadata title="Home Page" description="Home Page - DEVU" />
       <div>
         <div className='container'>
           <Hero collapsed={collapsed} />

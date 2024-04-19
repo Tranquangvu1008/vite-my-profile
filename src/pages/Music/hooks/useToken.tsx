@@ -17,7 +17,6 @@ export const useToken = () => {
                     localStorage.setItem("token", token);
                 }
             }
-            document.title = "Spotify";
         }
 
         if (token) {

@@ -1,9 +1,9 @@
 // import React from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { OutletContextType } from '../../../interface';
 import { Result } from './components/Result';
 import { useGetResult } from './hooks/useGetResult';
+import { Metadata } from '../../../components/Metadata/Metadata';
 
 const QuestionBoard = () => {
     const { collapsed } = useOutletContext<OutletContextType>();
@@ -11,14 +11,7 @@ const QuestionBoard = () => {
 
     return (
         <div>
-            <HelmetProvider>
-                <div>
-                    <Helmet>
-                        <title>Question Board</title>
-                        <meta name="description" content="Question board task was guided by Tony Nguyen" />
-                    </Helmet>
-                </div>
-            </HelmetProvider>
+            <Metadata title="Question Board" description="Question board task was guided by Tony Nguyen" />
             <div className={`flex flex-col gap-10 justify-between py-5 md:flex-row md:gap-4 ${collapsed ? 'px-10' : 'px-4'}`}>
                 {categoryQuestions && categoryQuestions.map((category) =>
                     <div key={category.category} className="w-full">

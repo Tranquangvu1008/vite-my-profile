@@ -1,9 +1,11 @@
+import { Metadata } from '../../components/Metadata/Metadata';
 import './ContactPage.scss'
 import contactImg from '/src/assets/images/i5.png'
 
-export const ContactPage = () => {
+const ContactPage = () => {
     return (
         <div>
+            <Metadata title="Contact" description="Contact about DEVU" />
             <section className="">
                 <div className="flex flex-col md:flex-row justify-center md:my-auto px-5 items-center gap-10 h-screen-minus-64">
                     <div className="">
@@ -45,3 +47,5 @@ export const ContactPage = () => {
         </div>
     )
 }
+
+export default ContactPage;

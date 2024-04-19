@@ -4,6 +4,7 @@ import { TableSection } from "./components/TableSection";
 import { PaginationSection } from "./components/PaginationSection";
 import { usePaging } from "./hooks/usePaging";
 import { useHandleForm } from "./hooks/useHandleForm";
+import { Metadata } from "../../../components/Metadata/Metadata";
 
 const headers = Array.of("FULL NAME", "EMAIL ADDRESS", "ADDRESS", "COUNTRY", "ACTION");
 
@@ -15,6 +16,7 @@ const ReactHookForm = () => {
 
     return (
         <div className='h-screen'>
+            <Metadata title="React Hook Form" description="React Hook Form task was guided by Tony Nguyen" />
             <div className="flex flex-col p-10 gap-5">
                 {/* Header screen */}
                 <HeaderSection />
