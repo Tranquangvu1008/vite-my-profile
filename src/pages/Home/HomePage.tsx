@@ -1,4 +1,3 @@
-import { Helmet, HelmetProvider } from "react-helmet-async"
 import Hero from "./components/Hero/Hero"
 import './HomePage.scss'
 import { useOutletContext } from "react-router-dom";
