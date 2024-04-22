@@ -26,9 +26,8 @@ const items: MenuItem[] = [
   getItem('Home', 'home', <HomeOutlined />, undefined, '/'),
   getItem('Music', 'music', <SpotifyOutlined />, undefined, '/music'),
   getItem('Task', 'subTasks', <BarsOutlined />, [
-    getItem('Question Board', 'questionBoard', <QuestionCircleOutlined />, undefined, '/questionBoard'),
+    // getItem('Question Board', 'questionBoard', <QuestionCircleOutlined />, undefined, '/questionBoard'),
     getItem('React Hook Form', 'reactHookForm', <FormOutlined />, undefined, '/reactHookForm'),
-    getItem('Change Font', 'changeFont', <FontSizeOutlined />, undefined, '/changeFont')
   ]),
   getItem('Contact', 'contact', <ContactsOutlined />, undefined, '/contact')
 ]
