@@ -6,12 +6,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Artist } from '../../../../models/Music/Artist';
 import { Track } from '../../../../models/Music/Track';
 import { Album } from '../../../../models/Music/Album';
-import { FavoriteTrack } from './components/FavoriteTrack';
-import NewAlbum from './components/NewAlbum';
 import { useFetchApi } from './hooks/useFetchApi';
 import { useOutletContext } from 'react-router-dom';
 import { OutletContextType } from '../../../../../../interface';
 import { useEffect, useState } from 'react';
+import { FavoriteTrack } from './Components/FavoriteTrack';
+import NewAlbum from './Components/NewAlbum';
 
 const Discover = () => {
     const { collapsed } = useOutletContext<OutletContextType>();
