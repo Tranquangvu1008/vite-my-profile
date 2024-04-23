@@ -11,7 +11,7 @@ const QuestionBoard = () => {
 
     return (
         <div>
-            <Metadata title="Question Board" description="Question board task was guided by Tony Nguyen" />
+            <Metadata title="Question Board" description="Question board task was guided by Tony Nguyen" url={window.location.href} />
             <div className={`flex flex-col gap-10 justify-between py-5 md:flex-row md:gap-4 ${collapsed ? 'px-10' : 'px-4'}`}>
                 {categoryQuestions && categoryQuestions.map((category) =>
                     <div key={category.category} className="w-full">

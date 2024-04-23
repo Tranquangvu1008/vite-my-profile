@@ -10,7 +10,7 @@ const MusicPage = () => {
     const { token } = useToken();
     return (
         <div>
-            <Metadata title="Music" description="Spotify in my life " />
+            <Metadata title="Music" description="Spotify in my life" url={window.location.href} />
             {token ? <SpotifyPage /> : <LoginPage collapsed={collapsed} />}
         </div>
     )

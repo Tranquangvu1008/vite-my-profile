@@ -16,7 +16,7 @@ const ReactHookForm = () => {
 
     return (
         <div className='h-screen'>
-            <Metadata title="React Hook Form" description="React Hook Form task was guided by Tony Nguyen" />
+            <Metadata title="React Hook Form" description="React Hook Form task was guided by Tony Nguyen" url={window.location.href} />
             <div className="flex flex-col p-10 gap-5">
                 {/* Header screen */}
                 <HeaderSection />

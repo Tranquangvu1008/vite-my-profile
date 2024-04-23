@@ -5,7 +5,7 @@ import { Metadata } from "../../components/Metadata/Metadata"
 export const ErrorPage = () => {
     return (
         <div>
-            <Metadata title="Error" description="Error for something went wrong" />
+            <Metadata title="Error" description="Error for something went wrong" url={window.location.href} />
             <section className="flex flex-col items-center justify-center h-screen">
                 <div className="px-10">
                     <div className="">

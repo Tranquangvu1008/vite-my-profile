@@ -5,7 +5,7 @@ import contactImg from '/src/assets/images/i5.png'
 const ContactPage = () => {
     return (
         <div>
-            <Metadata title="Contact" description="Contact about DEVU" />
+            <Metadata title="Contact" description="Contact about DEVU" url={window.location.href} />
             <section className="">
                 <div className="flex flex-col md:flex-row justify-center md:my-auto px-5 items-center gap-10 h-screen-minus-64">
                     <div className="">

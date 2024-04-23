@@ -3,13 +3,15 @@ import { Helmet } from "react-helmet-async"
 interface MetadataProps {
     title: string,
     description: string
+    url: string
 }
 
-export const Metadata: React.FC<MetadataProps> = ({ title, description }) => {
+export const Metadata: React.FC<MetadataProps> = ({ title, description, url }) => {
     return (
         <Helmet>
             <title>{title}</title>
             <meta name="description" content={description} />
+            <link rel="canonical" href={url} />
             <meta name="keywords" content="react, meta tags, seo" />
             <meta name="author" content="Admin" />
             <meta property="og:title" content={title} />
