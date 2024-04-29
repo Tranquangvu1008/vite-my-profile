@@ -13,7 +13,7 @@ const HomePage = () => {
 
   return (
     <div className='flex flex-col'>
-      <Metadata title="Home Page" description="Home Page - DEVU" url={window.location.href} />
+      <Metadata title="Home Page" description="Home page for introducing the owner of Devu.blog's website." url={window.location.href} />
       <div>
         <div className='container'>
           <Hero collapsed={collapsed} />

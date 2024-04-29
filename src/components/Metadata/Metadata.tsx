@@ -14,6 +14,7 @@ export const Metadata: React.FC<MetadataProps> = ({ title, description, url }) =
             <link rel="canonical" href={url} />
             <meta name="keywords" content="react, meta tags, seo" />
             <meta name="author" content="Admin" />
+            <meta property="og:type" content="website" />
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />
             <meta property="og:image" content="https://railsware.com/blog/wp-content/uploads/2019/07/Why-we-use-ReactJS-for-our-projects-Illustration.jpg" />

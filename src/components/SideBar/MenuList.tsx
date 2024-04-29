@@ -1,4 +1,4 @@
-import { BarsOutlined, ContactsOutlined, FontSizeOutlined, FormOutlined, HomeOutlined, QuestionCircleOutlined, SpotifyOutlined } from '@ant-design/icons'
+import { BarsOutlined, ContactsOutlined, FormOutlined, HomeOutlined, SpotifyOutlined } from '@ant-design/icons'
 import { Menu, MenuProps } from 'antd'
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
